@@ -8,8 +8,8 @@ export default {
   getUser (context) {
     return new Promise((resolve, reject) => {
       axios.get('API_URL' + '/user')
-        .then((user) => user.data)
-        .catch((err) => err)
+        .then((user) => resolve(user.data.data[0]))
+        .catch((err) => reject(err))
     })
   },
 
@@ -17,18 +17,18 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post(API_URL + '/access_tokens', user)
         .then((res) => {
-          const user = res.data.data
-          commit(types.SET_TOKEN, user.access_token)
+          const user = res.data.data[0]
+          return resolve(user)
         })
-        .catch((err) => err)
+        .catch((err) => reject(err))
     })
   },
 
   signup (user, context) {
     return new Promise((resolve, reject) => {
       axios.post(API_URL + '/users', user)
-        .then((user) => user.data)
-        .catch((err) => err)
+        .then((user) => resolve(user.data.data[0]))
+        .catch((err) => reject(err))
     })
   },
 
@@ -42,5 +42,9 @@ export default {
     return {
       'x-access-token': storage.getItem('token')
     }
+  },
+
+  checkAuth () {
+    return storage.getItem('token') ? true : false
   }
 }

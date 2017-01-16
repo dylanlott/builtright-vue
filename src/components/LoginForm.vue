@@ -1,9 +1,6 @@
 <template>
   <div>
-    Login
-
     <div class="well">
-
       <v-text-input
         id="Username"
         name="Username"
@@ -42,7 +39,6 @@
         isValid: false
       }
     },
-
     methods: {
       submit: function () {
         var user = {

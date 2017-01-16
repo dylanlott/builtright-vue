@@ -4,7 +4,10 @@
       <v-navbar>
         <v-navbar-logo>BuiltRight</v-navbar-logo>
         <v-navbar-items>
-          <v-navbar-item :item="item"></v-navbar-item>
+          <v-navbar-item :item="{href: '/login'}" v-if="!user.token">Login</v-navbar-item>
+          <v-navbar-item :item="{href: '/signup'}" v-if="!user.token">Sign Up</v-navbar-item>
+
+          <v-navbar-item v-if="user.token" @click.native="logout">Logout</v-navbar-item>
         </v-navbar-items>
       </v-navbar>
     </header>
@@ -19,16 +22,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
   export default {
+    computed: mapState({
+      user: state => state.user,
+      admin: state => state.admin
+    }),
     data () {
-      return {
-        item: {
-          href: '#!',
-          text: 'Get Started'
-        }
+      return {}
+    },
+    methods: {
+      logout () {
+        this.$store.dispatch('logoutUser')
       }
     },
-
     mounted () {
       this.$vuetify.init()
     }
