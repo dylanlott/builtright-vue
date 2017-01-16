@@ -12,9 +12,9 @@ export const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', component: landing },
-    { path: '/login', component: login },
-    { path: '/signup', component: signup },
+    { path: '/', component: landing, meta: {auth: false}},
+    { path: '/login', component: login, meta: {auth: false}},
+    { path: '/signup', component: signup, meta: {auth: false}},
     { path: '/dashboard', component: dashboard, meta: {auth: true}}
   ]
 })
