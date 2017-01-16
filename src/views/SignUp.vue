@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Welcome to BuiltRight</h1>
+    <h1>Sign Up for BuiltRight</h1>
     <h3>{{message}}</h3>
   </div>
 
@@ -8,10 +8,10 @@
 
 <script>
   export default {
-    name: 'landing',
+    name: 'signup',
     data () {
       return {
-        message: 'Welcome to BuiltRight'
+        message: 'The #1 way to showcase your modified cars'
       }
     }
   }
