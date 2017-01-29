@@ -7,17 +7,16 @@ import user from './api/user'
 
 Vue.use(Vuetify)
 
+/**
+ * Force Authorization
+ */
 router.beforeEach((to, from, next) => {
-  const auth = user.checkAuth()
-  console.log('user auth: ', auth)
-  console.log('meta auth: ', to.meta.auth);
-  if(to.meta.auth && !auth){
-    next({ path: '/login' })
-  } else {
-    next(true)
-  }
+  (to.meta.auth && !user.checkAuth) ? next({path: '/login'}) : next(true)
 })
 
+/**
+ * Invoke new Vue app, pass through Router and Store
+ */
 new Vue({
   el: '#app',
   router,

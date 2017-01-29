@@ -11,10 +11,9 @@
   export default {
     name: 'landing',
     data () {
-      return {
-        message: 'Welcome to BuiltRight'
-      }
-    }
+      return {}
+    },
+    components: {}
   }
 </script>
 

@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:3000'
 export default {
   getUser (context) {
     return new Promise((resolve, reject) => {
-      axios.get('API_URL' + '/user')
+      axios.get(API_URL + '/user')
         .then((user) => resolve(user.data.data[0]))
         .catch((err) => reject(err))
     })
@@ -46,5 +46,9 @@ export default {
 
   checkAuth () {
     return storage.getItem('token') ? true : false
+  },
+
+  getUserId () {
+    return storage.getItem('user_id')
   }
 }
