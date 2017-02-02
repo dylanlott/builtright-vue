@@ -11,7 +11,7 @@ Vue.use(Vuetify)
  * Force Authorization
  */
 router.beforeEach((to, from, next) => {
-  (to.meta.auth && !user.checkAuth) ? next({path: '/login'}) : next(true)
+  (to.meta.auth && !user.checkAuth()) ? next({path: '/login'}) : next(true)
 })
 
 /**

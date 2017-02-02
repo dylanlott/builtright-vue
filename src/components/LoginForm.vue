@@ -20,7 +20,7 @@
 
       <div>
         <v-btn raised primary class="button__login" @click.native='submit()'>Login</v-btn>
-        <p>Not a member yet? <a href="#">Sign up here</a>.</p>
+        <p>Not a member yet? <a href="/signup">Sign up here</a>.</p>
       </div>
 
     </div>
