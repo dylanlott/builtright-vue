@@ -1,18 +1,6 @@
 <template>
   <v-app>
-    <!-- <header>
-      <v-navbar>
-        <v-navbar-logo><a href="/dashboard" class="navbar__link">BuiltRight</a></v-navbar-logo>
-        <v-navbar-items>
-          <v-navbar-item :item="{href: '/login'}" v-if="!user.token">Login</v-navbar-item>
-          <v-navbar-item :item="{href: '/signup'}" v-if="!user.token">Sign Up</v-navbar-item>
-          <v-navbar-item :item="{href: '/profile'}" v-if="user.token">Profile</v-navbar-item>
-          <v-navbar-item v-if="user.token" @click.native="logout">Logout</v-navbar-item>
-        </v-navbar-items>
-      </v-navbar>
-    </header> -->
-
-    <v-toolbar class="toolbar__main orange" @click.native.stop="sidebar = false">
+    <v-toolbar class="toolbar__main" @click.native.stop="sidebar = false">
       <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar"/>
       <v-toolbar-title>BuiltRight</v-toolbar-title>
       <v-toolbar-items>
@@ -43,8 +31,13 @@
       </v-toolbar-items>
     </v-toolbar>
     <main>
-      <v-sidebar class="blue darken-3" drawer v-model="sidebar">
-       <v-btn @click.native.stop="sidebar = false">Close Menu</v-btn>
+      <v-sidebar class="sidebar" drawer v-model="sidebar">
+       <div class="sidebar__close" @click.native.stop="sidebar = false">
+         <v-icon @click.native="sidebar = false" class="sidebar__icon">close</v-icon>
+       </div>
+
+       <div class="sidebar__img"></div>
+
        <v-list dense>
          <v-list-item v-for="item in items">
            <v-list-tile>
@@ -62,6 +55,12 @@
         </v-container>
       </v-content>
     </main>
+    <v-footer class="footer">
+      <span>Copyright 2017 Hivemind Print and Design</span>
+      <span>Reddit</span>
+      <span>Facebook</span>
+      <span>Report a Bug</span>
+    </v-footer>
   </v-app>
 </template>
 
@@ -93,8 +92,6 @@ import { router } from './router/index'
           router.push('dashboard')
         }
       }
-    },
-    mounted () {
     }
   }
 </script>
@@ -102,17 +99,57 @@ import { router } from './router/index'
 <style lang="stylus">
   @import '../node_modules/vuetify/src/stylus/main'
   @import './css/main.css'
+  @import './css/theme.styl'
+
+  #app
+    background-color: blue
+
+  .content
+    margin-top: 0px
+
   .toolbar__main
     margin-bottom: 12px
+    background-color: orange
   .navbar__item
     width: 100%
+    font-size: 26px
+
   .navbar__link
     text-decoration: none
+    color: blue
+    font-size: 16px
     &:hover
-      color #eee
+      color: darker-gray
+
+  .sidebar
+    background-color: blue
 
   .sidebar__link
     color: #fff
     text-decoration: none
-    font-size: 20px
+    font-size: 26px
+
+  .sidebar__img
+    height: 100px
+    width: auto
+
+  .sidebar__close
+    float: right
+    height: 30px
+    width: 30px
+    text-align: center
+    padding-top: 3px
+    border-radius: 20px
+    background-color: lighten(blue, 10)
+    &:hover
+      background-color: lighten(blue, 2)
+      cursor: pointer
+
+  .sidebar__icon
+    color: gray
+
+  .footer
+    background-color: darken(blue, 7.5)
+    color: darken(gray, 20)
+
 </style>

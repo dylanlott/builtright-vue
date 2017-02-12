@@ -42,6 +42,20 @@ const mutations = {
     state.loading = false
     state.success = false
     state.errors = errors
+  },
+  [types.CREATE_BUILD_REQUEST] (state) {
+    state.loading = true
+    state.success = false
+  },
+  [types.CREATE_BUILD_SUCCESS] (state, build) {
+    state.loading = false
+    state.success = true
+    state.build = build
+  },
+  [types.CREATE_BUILD_FAILURE] (state, errors) {
+    state.loading = false
+    state.success = false
+    state.errors = errors
   }
 }
 
@@ -68,9 +82,13 @@ const actions = {
       })
   },
   createNewBuild ({commit, state}, build) {
-    // commit(types.CREATE_BUILD_REQUEST)
-    return api.createBuild()
-      .then((build) => build)
+    commit(types.CREATE_BUILD_REQUEST)
+    return api.createBuild(build)
+      .then((build) => {
+        console.log('BUILD ADDED: ', build)
+        commit(types.CREATE_BUILD_SUCCESS, build)
+        return build
+      })
   }
 }
 

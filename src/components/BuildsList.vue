@@ -4,9 +4,6 @@
       v-bind:indeterminate="true">
     </v-progress-linear>
 
-    <h3>Builds</h3>
-    <!-- {{builds}} -->
-
     <div v-for="build in builds.builds">
       <v-card>
         <v-card-text>

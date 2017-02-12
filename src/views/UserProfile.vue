@@ -1,25 +1,31 @@
 <template>
   <div>
+    <div class="secondary__nav">
+      User Profile
+    </div>
     <v-progress-linear v-if="user.user.loading"
       v-bind:indeterminate="true">
     </v-progress-linear>
 
-    <v-container fluid style="margin: 20px 0px">
-      <h1>User Profile</h1>
-    </v-container>
+      <v-icon x-large class="grey--text text--darken-2">settings</v-icon>
 
-    <h1 v-if="user.user.loading">LOADING</h1>
+      <p>
 
-    <v-card>
-      <v-card-text>
-        <!-- <code>{{user}}</code> -->
-        <v-list>
-          <v-list-item>Username: {{user.user.username}}<b></b></v-list-item>
-          <v-list-item>Email: {{user.user.email}}<b></b></v-list-item>
-          <v-list-item>Member Since: {{user.user.created_at}}<b></b></v-list-item>
-        </v-list>
-      </v-card-text>
-    </v-card>
+
+      </p>
+      <p>
+
+
+      </p>
+      <v-card>
+        <v-card-text>
+          <v-list>
+            <v-list-item>Username: {{user.user.username}}<b></b></v-list-item>
+            <v-list-item>Email: {{user.user.email}}<b></b></v-list-item>
+            <v-list-item>Member Since: {{user.user.created_at}}<b></b></v-list-item>
+          </v-list>
+        </v-card-text>
+      </v-card>
 
   </div>
 </template>
@@ -48,3 +54,6 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+</style>
