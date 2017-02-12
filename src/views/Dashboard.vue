@@ -4,65 +4,51 @@
       Dashboard
     </div>
 
-     <v-btn floating large error v-dropdown:dropdown4 class="secondary white--text action__button">
-       <v-icon>priority_high</v-icon>
-     </v-btn>
-     <v-dropdown id="dropdown4" hover class="dropdown__floating">
-       <li>
-         <a href="#!" class="dropdown__item">Add Build
-           <!-- <v-chip label small class="teal white--text right">new</v-chip> -->
-         </a>
-       </li>
-       <li>
-         <a href="#!" class="dropdown__item">Write A Post</a>
-       </li>
-       <li>
-         <a href="#!" class="dropdown__item">Shop For Parts
-           <v-icon class="secondary--text right">shop</v-icon>
-         </a>
-       </li>
-     </v-dropdown>
-
     <div class="card__basic">
       <v-card>
         <v-card-text>
           <div>
-            <h3 class="card__title display-4">My Builds</h3>
+            <!-- <h3 class="card__title display-4">My Builds</h3> -->
 
             <div>
+              <v-card horizontal>
+               <v-card-column class="green white--text">
+                 <v-card-row>
+                   <v-spacer></v-spacer>
+                   <v-card-text class="text-xs-right">
+                     <strong>Start a new build</strong>
+                     <div></div>
+                   </v-card-text>
+                 </v-card-row>
+               </v-card-column>
+               <!-- <v-card-row img="/public/doc-images/cards/store.jpg" height="125px"></v-card-row> -->
+             </v-card>
 
-              <!-- Builds List -->
-              <v-card>
-                <v-card-row class="grey darken">
-                  <v-card-title>
-                    <span class="white--text">Title</span>
+             <v-card horizontal>
+               <v-card-column class="orange white--text">
+                 <v-card-row>
+                   <v-spacer></v-spacer>
+                   <v-card-text class="text-xs-right">
+                     <strong>Browse other builds</strong>
+                     <div></div>
+                   </v-card-text>
+                 </v-card-row>
+               </v-card-column>
+               <!-- <v-card-row img="/public/doc-images/cards/store.jpg" height="125px"></v-card-row> -->
+             </v-card>
+
+             <v-card horizontal>
+                <v-card-column class="blue white--text">
+                  <v-card-row>
                     <v-spacer></v-spacer>
-                    <div>
-                      <v-btn icon="icon" v-dropdown:buildOptions class="white--text">
-                        <v-icon>more_vert</v-icon>
-                      </v-btn>
-                      <v-dropdown id="buildOptions" top right origin="top right">
-                        <v-dropdown-item v-bind:item="{ href: 'javascript:;', text: 'Never show rewards' }"></v-dropdown-item>
-                        <v-dropdown-item v-bind:item="{ href: 'javascript:;', text: 'Remove Card' }"></v-dropdown-item>
-                        <v-dropdown-item v-bind:item="{ href: 'javascript:;', text: 'Send Feedback' }"></v-dropdown-item>
-                      </v-dropdown>
-                    </div>
-                  </v-card-title>
-                </v-card-row>
-                <v-card-text>
-                  <v-card-row height="75px">
-                    <v-icon class="mr-5">build</v-icon>
-                    <div>
-                      <div>Make</div> <strong>Subaru</strong>
-                    </div>
+                    <v-card-text class="text-xs-right">
+                      <strong>Shop for parts</strong>
+                      <div></div>
+                    </v-card-text>
                   </v-card-row>
-                </v-card-text>
-                <v-card-row actions>
-                  <v-btn flat class="blue--text darken-1">View Build</v-btn>
-                </v-card-row>
+                </v-card-column>
+                <!-- <v-card-row img="/public/doc-images/cards/store.jpg" height="125px"></v-card-row> -->
               </v-card>
-
-
             </div>
           </div>
         </v-card-text>
@@ -76,10 +62,17 @@
 <script>
 import CreateBuildForm from '../components/CreateBuildForm.vue'
 import { mapState } from 'vuex'
+
+const storage = window.localStorage
+
 export default {
   computed: mapState({
-    user: state => state.user
+    user: state => state.user,
+    builds: state => state.builds
   }),
+  created: function() {
+    this.$store.dispatch('getBuildsForUser', storage.getItem('user_id'))
+  },
   data () {
     return {
       items: [{ href: '/dashboard', text: 'Home' }]

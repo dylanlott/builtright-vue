@@ -47,7 +47,6 @@ const mutations = {
 
 const actions = {
   getBuildsForUser ({commit, state}, user) {
-    console.log('GET BUILDS FOR USER FIRED')
     commit(types.GET_BUILDS_REQUEST)
     return api.getBuilds(user)
       .then((builds) => {
@@ -72,9 +71,6 @@ const actions = {
     // commit(types.CREATE_BUILD_REQUEST)
     return api.createBuild()
       .then((build) => build)
-  },
-  testAction ({commit, state}, testData) {
-    console.log(commit, state, testData)
   }
 }
 

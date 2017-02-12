@@ -28,7 +28,6 @@ const mutations = {
     state.token = null
     state.user = {}
   },
-  //takes a boolean
   [types.SET_ADMIN] (state, admin) {
     localStorage.setItem('admin', admin)
     state.admin = admin
@@ -41,6 +40,19 @@ const mutations = {
     state.loading = false
     state.success = true
     state.user = user
+  },
+  [types.RECEIVE_USER_INFO] (state) {
+    state.loading = true
+    state.success = false
+  },
+  [types.RECEIVE_USER_SUCCESS] (state, user) {
+    state.loading = false
+    state.success = true
+    state.user = user
+  },
+  [types.RECEIVE_USER_FAILURE] (state, user) {
+   state.loading = false
+   state.success = false
   }
 }
 
@@ -61,6 +73,19 @@ const actions = {
   logoutUser ({commit, state}) {
     commit(types.LOGOUT_USER)
     router.push('/')
+  },
+  getUserInfo ({commit, state}) {
+    commit(types.RECEIVE_USER_INFO)
+    return api.getUser()
+      .then((user) => {
+        console.log('GET USER INFO: ', user);
+        commit(types.RECEIVE_USER_SUCCESS, user)
+        return user;
+      })
+      .catch((err) => {
+        commit(types.RECEIVE_USER_FAILURE)
+        console.error(err)
+      })
   }
 }
 
