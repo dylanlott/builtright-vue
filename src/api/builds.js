@@ -17,12 +17,13 @@ export default {
    */
   getBuilds (user, context) {
     return new Promise((resolve, reject) => {
-      const params = {
-        user: id
-      }
-      axios.get(API_URL + '/builds', params)
-        .then((res) => resolve(res.data))
-        .catch((err) => reject(err))
+      axios.get(API_URL + '/builds', {
+        params: {
+          user: user
+        }
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
     })
   },
 
@@ -36,19 +37,26 @@ export default {
   getBuildDetails (id, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        access_token: token,
-        user_id: id
+        access_token: token
       }
 
-      axios.get(API_URL + '/builds', params)
+      axios.get(API_URL + '/builds/' + id, params)
       .then((res) => resolve(res.data))
       .catch((err) => reject(err))
     })
   },
 
-  createBuild (build, user, context) {
+  createBuild (build, context) {
     return new Promise((resolve, reject) => {
-      return resolve(build)
+      const url = API_URL + '/builds'
+
+      axios.post(url, build, {
+        params: {
+          access_token: build.token
+        }
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
     })
   },
 

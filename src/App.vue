@@ -68,32 +68,33 @@
 import { mapState } from 'vuex'
 import { router } from './router/index'
 
-  export default {
-    computed: mapState({
-      user: state => state.user,
-      admin: state => state.admin
-    }),
-    data () {
-      return {
-        sidebar: false,
-        items: [
-        { title: 'Home', href: '/' },
-        { title: 'Builds', href: '/builds' },
-        { title: 'Profile', href: '/profile' }
-      ]
-      }
+export default {
+  name: 'builtright',
+  computed: mapState({
+    user: state => state.user,
+    admin: state => state.admin
+  }),
+  data () {
+    return {
+      sidebar: false,
+      items: [
+      { title: 'Home', href: '/' },
+      { title: 'Builds', href: '/builds' },
+      { title: 'Profile', href: '/profile' }
+    ]
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logoutUser')
     },
-    methods: {
-      logout () {
-        this.$store.dispatch('logoutUser')
-      },
-      goToDashboard () {
-        if (state.user) {
-          router.push('dashboard')
-        }
+    goToDashboard () {
+      if (state.user) {
+        router.push('dashboard')
       }
     }
   }
+}
 </script>
 
 <style lang="stylus">

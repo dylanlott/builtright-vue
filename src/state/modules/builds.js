@@ -63,8 +63,8 @@ const actions = {
   getBuildsForUser ({commit, state}, user) {
     commit(types.GET_BUILDS_REQUEST)
     return api.getBuilds(user)
-      .then((builds) => {
-        console.log('BUILDS: ', builds)
+      .then((res) => {
+        const builds = res.data.data
         commit(types.GET_BUILDS_SUCCESS, builds)
       })
       .catch((err) => {
@@ -72,9 +72,12 @@ const actions = {
       })
   },
   getBuildDetails ({commit, state}, id) {
+    console.log('GET BUILD DETAILS REQUEST')
     commit(types.GET_BUILD_DETAILS_REQUEST)
     return api.getBuildDetails(id)
-      .then((details) => {
+      .then((res) => {
+        console.log('GETBUILDDETAILS: ', res.data[0]);
+        const details = res.data[0]
         commit(types.GET_BUILD_DETAILS_SUCCESS, details)
       })
       .catch((err) => {
@@ -85,7 +88,6 @@ const actions = {
     commit(types.CREATE_BUILD_REQUEST)
     return api.createBuild(build)
       .then((build) => {
-        console.log('BUILD ADDED: ', build)
         commit(types.CREATE_BUILD_SUCCESS, build)
         return build
       })

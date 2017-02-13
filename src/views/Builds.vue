@@ -16,13 +16,11 @@
 
 <script>
 import BuildsList from '../components/BuildsList.vue'
-
 export default {
   data () {
     return {}
   },
   created () {
-    return console.log('Builds loaded.')
   },
   components: { BuildsList }
 }

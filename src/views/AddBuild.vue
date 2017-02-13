@@ -15,6 +15,7 @@
 <script>
 import CreateBuildForm from '../components/CreateBuildForm.vue'
 export default {
+  name: 'addBuild',
   data () {
     return {}
   },

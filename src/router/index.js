@@ -10,6 +10,7 @@ import builds from '../views/Builds.vue'
 import addbuild from '../views/AddBuild.vue'
 import profile from '../views/UserProfile.vue'
 import forgotpassword from '../views/ForgotPassword.vue'
+import buildDetails from '../views/buildDetails.vue'
 
 Vue.use(VueRouter)
 
@@ -23,8 +24,15 @@ export const router = new VueRouter({
     { path: '/forgot', component: forgotpassword, meta: {auth: false}},
     { path: '/profile', component: profile, meta: {auth: true}},
     { path: '/dashboard', component: dashboard, meta: {auth: true}},
-    { path: '/builds', component: builds, meta: {auth: true}},
-    { path: '/builds/create', component: addbuild, meta: {auth: true}},
+    { path: '/builds', name: 'builds', component: builds, meta: {auth: true}},
+    { path: '/builds/create',
+      name: 'addBuild',
+      component: addbuild,
+      meta: {auth: true}},
+    { path: '/builds/:id',
+      name: 'buildDetails',
+      component: buildDetails,
+      meta: { auth: true}},
     { path: '*', component: notfound }
   ]
 })

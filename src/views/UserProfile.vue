@@ -35,6 +35,7 @@ import { mapState } from 'vuex'
 const storage = window.localStorage
 
 export default {
+  name: 'userProfile',
   data () {
     return {
       user: {

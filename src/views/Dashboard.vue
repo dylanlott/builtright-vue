@@ -66,6 +66,7 @@ import { mapState } from 'vuex'
 const storage = window.localStorage
 
 export default {
+  name: 'dashboard',
   computed: mapState({
     user: state => state.user,
     builds: state => state.builds

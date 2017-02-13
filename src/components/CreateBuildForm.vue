@@ -1,8 +1,9 @@
-<template>
+    <template>
   <div>
     <h1>Create A New Build</h1>
 
     <v-text-input
+      class="build__input"
       id="Build Name"
       name="Build Name"
       label="Build Name"
@@ -11,6 +12,7 @@
     ></v-text-input>
 
     <v-text-input
+      class="build__input"
       id="Build make"
       name="Build make"
       label="Build make"
@@ -19,6 +21,7 @@
     ></v-text-input>
 
     <v-text-input
+      class="build__input"
       id="Build Model"
       name="Build Model"
       label="Build Model"
@@ -27,6 +30,7 @@
     ></v-text-input>
 
     <v-text-input
+      class="build__input"
       id="Build Year"
       name="Build Year"
       label="Build Year"
@@ -35,6 +39,7 @@
     ></v-text-input>
 
     <v-text-input
+      class="build__input"
       id="Build Trim"
       name="Build Trim"
       label="Build Trim"
@@ -43,14 +48,14 @@
     ></v-text-input>
 
     <div>
-
-      <v-btn raised success @click.native='submit()'>Create Build</v-btn>
+      <v-btn raised @click.native='submit()' class="build__btn">Create Build</v-btn>
     </div>
 </div>
 </template>
 
 <script>
 import user from '../api/user'
+const storage = window.localStorage
 
   export default {
     data () {
@@ -66,17 +71,36 @@ import user from '../api/user'
     },
     methods: {
       submit: function () {
-        const user = user.getUserId()
-        console.log('USER: ', user)
+        const user = storage.getItem('user_id')
+        const token = storage.getItem('token')
         const build = {
+          user: user,
+          token: token,
           name: this.build.name,
           make: this.build.make,
           model: this.build.model,
           year: this.build.year,
           trim: this.build.trim
         }
+        console.log(build)
         this.$store.dispatch('createNewBuild', build)
       }
     }
   }
 </script>
+
+<style lang="stylus">
+@import '../css/theme.styl'
+  .input-group label
+    color: light-blue
+
+  .build__input
+    color: blue
+
+  label
+    color: blue
+
+  .build__btn
+    background-color: orange
+    color: white
+</style>
