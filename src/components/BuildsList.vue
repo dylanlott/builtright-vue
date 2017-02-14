@@ -25,7 +25,7 @@
           </v-card-text>
         </v-card-row>
         <v-card-row actions>
-          <router-link :to="{name: 'buildDetails', params: { id: build.id }}">
+          <router-link class="routerlink" :to="{name: 'buildDetails', params: { id: build.id }}">
             <v-btn flat class="white--text">View</v-btn>
           </router-link>
           <v-spacer></v-spacer>

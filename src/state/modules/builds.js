@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
-import api from '../../api/builds'
+import builds from '../../api/builds'
+import parts from '../../api/parts'
 import { router } from '../../router/index'
 
 const localStorage = window.localStorage
@@ -56,13 +57,41 @@ const mutations = {
     state.loading = false
     state.success = false
     state.errors = errors
+  },
+  [types.ADD_PART_REQUEST] (state) {
+    state.loading = true
+    state.success = false
+  },
+  [types.ADD_PART_SUCCESS] (state, part) {
+    state.loading = false
+    state.success = true
+    state.part = part
+  },
+  [types.ADD_PART_FAILURE] (state, errors) {
+    state.loading = false
+    state.success = false
+    state.errors = errors
+  },
+  [types.GET_PARTS_REQUEST] (state) {
+    state.loading = true
+    state.success = false
+  },
+  [types.GET_PARTS_SUCCESS] (state, parts) {
+    state.loading = false
+    state.success = true
+    state.parts = parts
+  },
+  [types.GET_PARTS_FAILURE] (state, errors) {
+    state.loading = false
+    state.success = false
+    state.errors = errors
   }
 }
 
 const actions = {
   getBuildsForUser ({commit, state}, user) {
     commit(types.GET_BUILDS_REQUEST)
-    return api.getBuilds(user)
+    return builds.getBuilds(user)
       .then((res) => {
         const builds = res.data.data
         commit(types.GET_BUILDS_SUCCESS, builds)
@@ -72,11 +101,9 @@ const actions = {
       })
   },
   getBuildDetails ({commit, state}, id) {
-    console.log('GET BUILD DETAILS REQUEST')
     commit(types.GET_BUILD_DETAILS_REQUEST)
-    return api.getBuildDetails(id)
+    return builds.getBuildDetails(id)
       .then((res) => {
-        console.log('GETBUILDDETAILS: ', res.data[0]);
         const details = res.data[0]
         commit(types.GET_BUILD_DETAILS_SUCCESS, details)
       })
@@ -86,10 +113,32 @@ const actions = {
   },
   createNewBuild ({commit, state}, build) {
     commit(types.CREATE_BUILD_REQUEST)
-    return api.createBuild(build)
+    return builds.createBuild(build)
       .then((build) => {
         commit(types.CREATE_BUILD_SUCCESS, build)
         return build
+      })
+  },
+  addPartToBuild ({commit, state}, part) {
+    commit(types.ADD_PART_REQUEST)
+    return parts.addPartToBuild(part)
+      .then((part) => {
+        commit(types.ADD_PART_SUCCESS, part)
+        return part
+      })
+      .catch((err) => commit(types.ADD_PART_FAILURE, err))
+  },
+  getPartsForBuild ({commit, state}, id) {
+    commit(types.GET_PARTS_REQUEST)
+    return parts.getPartsForBuild(id)
+      .then((res) => {
+        const parts = res.data.data;
+        commit(types.GET_PARTS_SUCCESS, parts)
+        return parts
+      })
+      .catch((err) => {
+        commit(types.GET_PARTS_FAILURE)
+        return err
       })
   }
 }

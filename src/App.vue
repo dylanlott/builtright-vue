@@ -107,6 +107,7 @@ export default {
 
   .content
     margin-top: 0px
+    background-color: blue
 
   .toolbar__main
     margin-bottom: 12px

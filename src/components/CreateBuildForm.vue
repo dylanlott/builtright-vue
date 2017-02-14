@@ -55,38 +55,41 @@
 
 <script>
 import user from '../api/user'
+import { router } from '../router/index'
+
 const storage = window.localStorage
 
-  export default {
-    data () {
-      return {
-        build: {
-          name: '',
-          make: '',
-          model: '',
-          year: '',
-          trim: ''
-        }
-      }
-    },
-    methods: {
-      submit: function () {
-        const user = storage.getItem('user_id')
-        const token = storage.getItem('token')
-        const build = {
-          user: user,
-          token: token,
-          name: this.build.name,
-          make: this.build.make,
-          model: this.build.model,
-          year: this.build.year,
-          trim: this.build.trim
-        }
-        console.log(build)
-        this.$store.dispatch('createNewBuild', build)
+export default {
+  data () {
+    return {
+      build: {
+        name: '',
+        make: '',
+        model: '',
+        year: '',
+        trim: ''
       }
     }
+  },
+  methods: {
+    submit: function () {
+      const user = storage.getItem('user_id')
+      const token = storage.getItem('token')
+      const build = {
+        user: user,
+        token: token,
+        name: this.build.name,
+        make: this.build.make,
+        model: this.build.model,
+        year: this.build.year,
+        trim: this.build.trim
+      }
+      console.log(build)
+      this.$store.dispatch('createNewBuild', build)
+      router.push({ name: 'builds'})
+    }
   }
+}
 </script>
 
 <style lang="stylus">
