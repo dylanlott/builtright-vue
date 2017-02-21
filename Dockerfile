@@ -1,3 +1,3 @@
-FROM kyma/docker-nginx
-COPY ./dist /var/www/
-CMD 'nginx'
+FROM nginx
+COPY . /usr/share/nginx/html
+
