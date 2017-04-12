@@ -26,3 +26,11 @@ import {router} from '../router/index.js'
     components: { LoginForm }
   }
 </script>
+
+<style lang="stylus">
+  @import '../css/theme.styl'
+
+  h1 {
+    color: white
+  }
+</style>

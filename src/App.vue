@@ -2,7 +2,9 @@
   <v-app>
     <v-toolbar class="toolbar__main" @click.native.stop="sidebar = false">
       <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar"/>
-      <v-toolbar-title>BuiltRight</v-toolbar-title>
+      <router-link :to="{ path: 'dashboard' }" style="text-decoration: none">
+        <v-toolbar-title>BuiltRight</v-toolbar-title>
+      </router-link>
       <v-toolbar-items>
         <!-- <v-btn dark icon>
           <v-icon>list</v-icon>
@@ -11,18 +13,40 @@
           <v-btn dark icon slot="activator">
             <v-icon>more_vert</v-icon>
           </v-btn>
-          <v-list>
+          <v-list v-if="user.token">
             <v-list-item>
               <v-list-tile>
                 <v-list-tile-title
                 class="navbar__item">
                   <router-link :to="{ path: 'profile' }" class="navbar__link">
                     Profile
-                  </router-link></v-list-tile-title>
+                  </router-link>
+                </v-list-tile-title>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-title class="navbar__item" @click.native="logout">
-                  <router-link to="logout" class="navbar__link">Log Out</router-link>
+                  <router-link to="logout" class="navbar__link">
+                    Log Out
+                  </router-link>
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list-item>
+          </v-list>
+          <v-list>
+            <v-list-item>
+              <v-list-tile>
+                <v-list-tile-title
+                class="navbar__item">
+                  <router-link :to="{ path: 'login' }" class="navbar__link">
+                    Login
+                  </router-link>
+                </v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title class="navbar__item" @click.native="logout">
+                  <router-link :to="{ path: 'signup'}" class="navbar__link">
+                    Sign Up
+                  </router-link>
                 </v-list-tile-title>
               </v-list-tile>
             </v-list-item>
