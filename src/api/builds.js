@@ -18,7 +18,7 @@ export default {
   getBuilds (user, context) {
     return new Promise((resolve, reject) => {
       console.log('builds token', token);
-      axios.get(API_URL + '/builds', {
+      axios.get(`${API_URL}/builds`, {
         params: {
           token: token,
           owner: this.getUserId()
