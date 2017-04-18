@@ -11,6 +11,18 @@ const state = {
 }
 
 const mutations = {
+  [types.SET_ADMIN] (state, admin) {
+    localStorage.setItem('admin', admin)
+    state.admin = admin
+  },
+  [types.SET_ACCESS_LEVEL] (state, level) {
+    state.access = level
+    localStorage.setItem('access', level)
+  },
+  [types.SET_MONGO_ID] (state, id) {
+    state._id = id
+    localStorage.setItem('_id', id)
+  },
   [types.SET_TOKEN] (state, token) {
     localStorage.setItem('token', token)
   },
@@ -27,10 +39,6 @@ const mutations = {
     localStorage.removeItem('token')
     state.token = null
     state.user = {}
-  },
-  [types.SET_ADMIN] (state, admin) {
-    localStorage.setItem('admin', admin)
-    state.admin = admin
   },
   [types.SIGNUP_USER_REQUEST] (state, user) {
     state.loading = true
@@ -53,7 +61,7 @@ const mutations = {
   [types.RECEIVE_USER_FAILURE] (state, user) {
    state.loading = false
    state.success = false
-  }
+ }
 }
 
 const actions = {
@@ -61,11 +69,16 @@ const actions = {
     return api.login(user)
       .then((user) => {
         commit(types.LOGIN_USER, user)
-        commit(types.SET_USER_ID, user.user_id)
-        commit(types.SET_TOKEN, user.access_token)
+        commit(types.SET_USER_ID, user.data.email)
+        commit(types.SET_TOKEN, user.token)
+        commit(types.SET_ACCESS_LEVEL, user.data.access)
+        commit(types.SET_MONGO_ID, user.data._id)
         router.push('/dashboard')
       })
-      .catch((err) => e.error(err))
+      .catch((err) => {
+        console.log('err logging in user:', err);
+        reject(err)
+      })
   },
   getAuthToken ({commit, state}) {
     return localStorage.getItem('token')
@@ -78,7 +91,7 @@ const actions = {
     commit(types.RECEIVE_USER_INFO)
     return api.getUser()
       .then((user) => {
-        console.log('GET USER INFO: ', user);
+        console.log('GET USER INFO: ', user)
         commit(types.RECEIVE_USER_SUCCESS, user)
         return user;
       })
@@ -86,6 +99,12 @@ const actions = {
         commit(types.RECEIVE_USER_FAILURE)
         console.error(err)
       })
+  },
+  signup ({commit, state}, user) {
+    commit(types.SIGNUP_USER_REQUEST)
+    return api.signup(user)
+      .then((user) => resolve(user))
+      .catch((err) => reject(err))
   }
 }
 

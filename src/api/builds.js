@@ -17,8 +17,10 @@ export default {
    */
   getBuilds (user, context) {
     return new Promise((resolve, reject) => {
+      console.log('token', token);
       axios.get(API_URL + '/builds', {
         params: {
+          token: token,
           owner: user
         }
       })
@@ -37,10 +39,10 @@ export default {
   getBuildDetails (id, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        access_token: token
+        token: token
       }
 
-      axios.get(API_URL + '/builds/' + id, params)
+      axios.get(`${API_URL}/builds/${id}`, params)
       .then((res) => resolve(res.data))
       .catch((err) => reject(err))
     })
@@ -52,7 +54,7 @@ export default {
 
       axios.post(url, build, {
         params: {
-          access_token: build.token
+          token: build.token
         }
       })
       .then((res) => resolve(res))

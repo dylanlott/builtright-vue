@@ -8,7 +8,9 @@ import user from './api/user'
 Vue.use(Vuetify)
 
 router.beforeEach((to, from, next) => {
-  (to.meta.auth && !user.checkAuth()) ? next({path: '/login'}) : next(true)
+  (to.meta.auth && !user.checkAuth() && user.checkAuth() !== undefined)
+    ? next({path: '/login'})
+    : next(true)
 })
 
 new Vue({
