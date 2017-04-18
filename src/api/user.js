@@ -11,7 +11,7 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/users/` + this.getUserId(), {
         params: {
-          token: this.checkAuth()
+          token: this.getToken()
         }
       })
         .then((user) => resolve(user.data.data[0]))
@@ -29,7 +29,7 @@ export default {
 
   signup (user, context) {
     return new Promise((resolve, reject) => {
-      axios.post(API_URL + '/users', user)
+      axios.post(`${API_URL}/users`, user)
         .then((user) => resolve(user.data.data[0]))
         .catch((err) => reject(err))
     })
@@ -51,7 +51,15 @@ export default {
     return storage.getItem('token') ? true : false
   },
 
+  getToken () {
+    return storage.getItem('token')
+  },
+
+  getUserEmail () {
+    return storage.getItem('email')
+  },
+
   getUserId () {
-    return storage.getItem('user_id')
+    return storage.getItem('_id')
   }
 }

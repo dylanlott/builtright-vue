@@ -17,14 +17,17 @@ export default {
    */
   getBuilds (user, context) {
     return new Promise((resolve, reject) => {
-      console.log('token', token);
+      console.log('builds token', token);
       axios.get(API_URL + '/builds', {
         params: {
           token: token,
-          owner: user
+          owner: this.getUserId()
         }
       })
-      .then((res) => resolve(res))
+      .then((res) => {
+        console.log('builds res', res);
+        return resolve(res)
+      })
       .catch((err) => reject(err))
     })
   },
