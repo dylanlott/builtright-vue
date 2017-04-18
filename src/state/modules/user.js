@@ -100,7 +100,7 @@ const actions = {
       })
       .catch((err) => {
         commit(types.RECEIVE_USER_FAILURE)
-        console.error(err)
+        console.log(err)
       })
   },
   signup ({commit, state}, user) {

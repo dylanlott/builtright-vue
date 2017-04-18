@@ -93,7 +93,7 @@ const actions = {
     commit(types.GET_BUILDS_REQUEST)
     return builds.getBuilds(user)
       .then((res) => {
-        const builds = res.data.data
+        const builds = res.data
         commit(types.GET_BUILDS_SUCCESS, builds)
       })
       .catch((err) => {
