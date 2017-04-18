@@ -2,18 +2,16 @@ import axios from 'axios'
 import * as types from '../state/mutation-types'
 
 const storage = window.localStorage
-// const API_URL = 'http://localhost:3000'
-
 const API_URL = process.env.NODE_ENV==='production'
-  ? 'http://localhost:3000'
-  : 'http://localhost:3000'
+  ? 'http://localhost:3030'
+  : 'http://localhost:3030'
 
 export default {
   getUser (context) {
     return new Promise((resolve, reject) => {
       axios.get(API_URL + '/users/' + this.getUserId(), {
         params: {
-          access_token: this.checkAuth()
+          token: this.checkAuth()
         }
       })
         .then((user) => resolve(user.data.data[0]))
@@ -23,7 +21,7 @@ export default {
 
   login (user, context) {
     return new Promise((resolve, reject) => {
-      axios.post(API_URL + '/access_tokens', user)
+      axios.post(API_URL + '/auth/local/', user)
         .then((res) => {
           const user = res.data.data[0]
           return resolve(user)
