@@ -21,12 +21,8 @@ export default {
 
   login (user, context) {
     return new Promise((resolve, reject) => {
-      console.log('user asdf', user);
       axios.post(`${API_URL}/auth/local`, user)
-        .then((res) => {
-          console.log('res', res);
-          return resolve(user)
-        })
+        .then((res) => resolve(res.data))
         .catch((err) => reject(err))
     })
   },

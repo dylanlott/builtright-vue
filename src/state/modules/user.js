@@ -12,10 +12,12 @@ const state = {
 
 const mutations = {
   [types.SET_ADMIN] (state, admin) {
+    console.log('admin', admin);
     localStorage.setItem('admin', admin)
     state.admin = admin
   },
   [types.SET_ACCESS_LEVEL] (state, level) {
+    console.log('level', level);
     state.access = level
     localStorage.setItem('access', level)
   },
@@ -24,6 +26,7 @@ const mutations = {
     localStorage.setItem('_id', id)
   },
   [types.SET_TOKEN] (state, token) {
+    console.log('TOKEN', token);
     localStorage.setItem('token', token)
   },
   [types.SET_USER_ID] (state, id) {
