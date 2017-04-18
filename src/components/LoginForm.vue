@@ -2,10 +2,10 @@
   <div>
     <div class="well">
       <v-text-input
-        id="Username"
-        name="Username"
-        label="Username"
-        v-model="user.username"
+        id="Email"
+        name="Email"
+        label="Email"
+        v-model="user.email"
         required
       ></v-text-input>
 
@@ -33,7 +33,7 @@
     data () {
       return {
         user: {
-          username: '',
+          email: '',
           password: ''
         },
         isValid: false
@@ -42,11 +42,13 @@
     methods: {
       submit: function () {
         var user = {
-          username: this.user.username,
-          password: this.user.password,
-          grant_type: 'password'
+          email: this.user.email,
+          password: this.user.password
         }
+        console.log('user', user);
         this.$store.dispatch('loginUser', user)
+        this.user.email = ''
+        this.user.password = ''
       }
     }
   }

@@ -3,7 +3,7 @@ import * as types from '../state/mutation-types'
 
 const storage = window.localStorage
 const token = storage.getItem('token')
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://localhost:3030'
 
 export default {
 
@@ -19,7 +19,7 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(API_URL + '/builds', {
         params: {
-          user: user
+          owner: user
         }
       })
       .then((res) => resolve(res))

@@ -9,7 +9,7 @@ const API_URL = process.env.NODE_ENV==='production'
 export default {
   getUser (context) {
     return new Promise((resolve, reject) => {
-      axios.get(API_URL + '/users/' + this.getUserId(), {
+      axios.get(`${API_URL}/users/` + this.getUserId(), {
         params: {
           token: this.checkAuth()
         }
@@ -21,9 +21,10 @@ export default {
 
   login (user, context) {
     return new Promise((resolve, reject) => {
-      axios.post(API_URL + '/auth/local/', user)
+      console.log('user asdf', user);
+      axios.post(`${API_URL}/auth/local`, user)
         .then((res) => {
-          const user = res.data.data[0]
+          console.log('res', res);
           return resolve(user)
         })
         .catch((err) => reject(err))

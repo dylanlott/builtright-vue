@@ -47,7 +47,7 @@ export default {
         grant_type: 'password'
       }
 
-      this.$store.dispatch('signupUser', user)
+      this.$store.dispatch('signup', user)
       this.user.username = ''
       this.user.password = ''
     }
