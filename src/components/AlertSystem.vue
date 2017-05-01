@@ -12,7 +12,12 @@ export default {
       alerts: []
     }
   },
-  mounted () {}
+  computed () {
+
+  },
+  mounted () {
+
+  }
 }
 </script>
 

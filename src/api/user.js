@@ -34,6 +34,7 @@ export default {
         .then((user) => {
           console.log('login user', user);
           storage.set('token', user.token)
+          router.push({ name: 'dashboard' })
           resolve(user.data.data[0])
         })
         .catch((err) => reject(err))
