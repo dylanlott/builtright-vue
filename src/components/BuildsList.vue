@@ -4,9 +4,6 @@
       v-bind:indeterminate="true">
     </v-progress-linear>
 
-    <!-- <pre>
-      {{builds.builds}}
-    </pre> -->
     <v-card
       class="build__cards grey darken-3 white--text"
       v-for="build in builds.builds">
@@ -47,7 +44,10 @@ const storage = window.localStorage
 export default {
   name: 'buildsList',
   data () {
-    return {}
+    return {
+      user: {},
+      builds: []
+    }
   },
   computed: mapState({
     user: state => state.user,

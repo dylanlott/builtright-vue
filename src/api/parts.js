@@ -22,7 +22,8 @@ export default {
         token: token
       }
       part.owner = user.getUserId()
-      axios.post(`${API_URL}/builds/${build}`, part, params)
+      part.build = build
+      axios.post(`${API_URL}/parts`, part, params)
         .then((res) => resolve(res))
         .catch((err) => reject(err))
     })
@@ -34,7 +35,7 @@ export default {
    * @param  {type} id      the ID of the build
    * @param  {type} context context
    * @return {type}         returns array of parts for the build if successful
-   */   
+   */
   getPartsForBuild (id, context) {
     return new Promise((resolve, reject) => {
       const params = {

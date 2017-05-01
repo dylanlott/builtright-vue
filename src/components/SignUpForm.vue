@@ -3,10 +3,10 @@
     <div class="form__signup well">
       <div class="inputs">
         <v-text-input
-          id="Username"
-          name="Username"
-          label="Username"
-          v-model="user.username"
+          id="Email"
+          name="Email"
+          label="Email"
+          v-model="user.email"
           required
         ></v-text-input>
         <v-text-input
@@ -42,9 +42,8 @@ export default {
   methods: {
     submit () {
       var user = {
-        username: this.user.username,
-        password: this.user.password,
-        grant_type: 'password'
+        email: this.user.email,
+        password: this.user.password
       }
 
       this.$store.dispatch('signup', user)

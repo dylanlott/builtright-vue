@@ -107,7 +107,6 @@ const actions = {
     commit(types.SIGNUP_USER_REQUEST)
     return api.signup(user)
       .then((user) => resolve(user))
-      .catch((err) => reject(err))
   }
 }
 

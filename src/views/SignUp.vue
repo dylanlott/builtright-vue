@@ -1,9 +1,7 @@
 <template>
-  <div>
+  <div class="signup">
     <h1>Sign Up for BuiltRight</h1>
-    <h3>{{message}}</h3>
-
-
+    <h3 class="tagline">{{message}}</h3>
     <div>
        <SignUpForm></SignUpForm>
     </div>
@@ -23,3 +21,8 @@
     components: { SignUpForm }
   }
 </script>
+
+<style lang="stylus">
+.tagline
+  color: #fff
+</style>

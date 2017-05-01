@@ -20,36 +20,42 @@ export const router = new VueRouter({
     base: __dirname,
     routes: [
         {
+            name: 'landing',
             path: '/',
             component: landing,
             meta: {
                 auth: false
             }
         }, {
+            name: 'login',
             path: '/login',
             component: login,
             meta: {
                 auth: false
             }
         }, {
+            name: 'signup',
             path: '/signup',
             component: signup,
             meta: {
                 auth: false
             }
         }, {
+            name: 'forgot',
             path: '/forgot',
             component: forgotpassword,
             meta: {
                 auth: false
             }
         }, {
+            name: 'profile',
             path: '/profile',
             component: profile,
             meta: {
                 auth: true
             }
         }, {
+            name: 'dashboard',
             path: '/dashboard',
             component: dashboard,
             meta: {

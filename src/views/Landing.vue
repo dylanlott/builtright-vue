@@ -1,20 +1,20 @@
 <template>
   <div>
-    <img class="header__img" src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/739D74EEB8.jpg">
     <div class="header__container">
       <h1>BuiltRight</h1>
+      <h3 class="tagline">The #1 car modification and project car community.</h3>
+      <SignUpForm></SignUpForm>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'landing',
-    data () {
-      return {}
-    },
-    components: {}
-  }
+import SignUpForm from '../components/SignUpForm.vue'
+
+export default {
+  name: 'landing',
+  components: { SignUpForm }
+}
 </script>
 
 <style lang="stylus">
@@ -25,8 +25,8 @@
   z-index: -999
 
 .header__container
-  z-index: 10
   width: 100%
-  background-color: #eee
-  position: absolute
+
+.tagline
+  color: #fff
 </style>

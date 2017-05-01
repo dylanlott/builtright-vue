@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AlertSystem></AlertSystem>
     <v-toolbar class="toolbar__main" @click.native.stop="sidebar = false">
       <v-toolbar-side-icon @click.native.stop="sidebar = !sidebar"/>
       <router-link :to="{ path: 'dashboard' }" style="text-decoration: none">
@@ -81,8 +82,9 @@
     </main>
     <v-footer class="footer">
       <span>Copyright 2017 Hivemind Print and Design</span>
-      <span>Reddit</span>
-      <span>Facebook</span>
+      <span><a href="reddit.com/r/builtright" target="__blank">Reddit</a></span>
+      <span><a href="www.facebook.com/builtrightapp" target="__blank">Facebook</a></span>
+      <span><a href="www.instagram.com/builtrightapp" target="__blank">Instagram</a></span>
       <span>Report a Bug</span>
     </v-footer>
   </v-app>
@@ -91,6 +93,7 @@
 <script>
 import { mapState } from 'vuex'
 import { router } from './router/index'
+import AlertSystem from './components/AlertSystem.vue'
 
 export default {
   name: 'builtright',
@@ -117,6 +120,9 @@ export default {
         router.push('dashboard')
       }
     }
+  },
+  components: {
+    AlertSystem
   }
 }
 </script>
@@ -128,7 +134,7 @@ export default {
 
   #app
     background-color: blue
-
+    padding-bottom: 60px
   .content
     margin-top: 0px
     background-color: blue
@@ -177,5 +183,8 @@ export default {
   .footer
     background-color: darken(blue, 7.5)
     color: darken(gray, 20)
-
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
 </style>

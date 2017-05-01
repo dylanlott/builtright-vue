@@ -29,8 +29,13 @@ export default {
 
   signup (user, context) {
     return new Promise((resolve, reject) => {
+      console.log('user', user);
       axios.post(`${API_URL}/users`, user)
-        .then((user) => resolve(user.data.data[0]))
+        .then((user) => {
+          console.log('login user', user);
+          storage.set('token', user.token)
+          resolve(user.data.data[0])
+        })
         .catch((err) => reject(err))
     })
   },
