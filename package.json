@@ -1,7 +1,7 @@
 {
-  "name": "vuetify-webpack-simple",
-  "description": "Forked webpack simple from official vue docs",
-  "author": "John Leider <john.j.leider@gmail.com>",
+  "name": "builtright-vue",
+  "description": "vue2 app for the builtright community",
+  "author": "Dylan Lott <lott.dylan@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot --host=0.0.0.0 --port=8081",
