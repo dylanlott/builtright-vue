@@ -13,6 +13,7 @@ import forgotpassword from '../views/ForgotPassword.vue'
 import buildDetails from '../views/BuildDetails.vue'
 import addPart from '../views/AddPart.vue'
 import forum from '../views/Forum.vue'
+import addPost from '../views/AddPost.vue'
 
 Vue.use(VueRouter)
 
@@ -95,6 +96,13 @@ export const router = new VueRouter({
     component: forum,
     meta: {
       auth: false
+    }
+  }, {
+    path: '/forum/add',
+    name: 'addPost',
+    component: addPost,
+    meta: {
+      auth: true
     }
   }, {
     path: '*',

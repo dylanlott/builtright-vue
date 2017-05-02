@@ -21,7 +21,7 @@ export default {
     })
   },
 
-  createPost () {
+  createPost (post) {
     return new Promise((resolve, reject) => {
       axios.post(`${URL}/posts`, post, {
         params: {

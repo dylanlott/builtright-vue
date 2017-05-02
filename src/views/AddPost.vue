@@ -2,7 +2,7 @@
   <div class="add-post">
     <h1>Add Post</h1>
 
-    <div class="form">
+    <div>
 
     </div>
   </div>
@@ -13,10 +13,14 @@ export default {
   name: 'AddPostForm',
   data () {
     return {
+      title: ''
     }
   },
-  components: {},
-  methods: {}
+  methods: {
+    submit () {
+      this.$store.dispatch('createPost')
+    }
+  }
 }
 </script>
 
