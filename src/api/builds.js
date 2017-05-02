@@ -1,13 +1,12 @@
 import axios from 'axios'
 import * as types from '../state/mutation-types'
+import config from '../config'
 
 const storage = window.localStorage
 const token = storage.getItem('token')
-const API_URL = 'http://localhost:3030'
+const API_URL = config.API_URL
 
 export default {
-
-
   /**
    * getBuilds - Returns the user's builds
    *

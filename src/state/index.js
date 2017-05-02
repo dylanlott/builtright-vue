@@ -5,6 +5,7 @@ import * as getters from './getters'
 
 import user from './modules/user'
 import builds from './modules/builds'
+import posts from './modules/posts'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     user,
-    builds
+    builds,
+    posts
   }
 })
