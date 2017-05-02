@@ -3,18 +3,14 @@
     <div class="secondary__nav">
       Dashboard / Forum
     </div>
-
     <div class="posts">
       <div v-if="!posts.data">
         <p style="color: #fff">There are no posts to show here.</p>
       </div>
-
       <div class="post-list">
-
         <v-list two-line>
           <template v-for="item in posts.data">
-            <v-subheader v-if="item.header" v-text="item.header" />
-            <v-list-item v-else v-bind:key="item.title">
+            <v-list-item>
               <v-list-tile>
                 <v-list-tile-content>
                   <v-list-tile-title v-html="item.title" />
@@ -24,7 +20,6 @@
             </v-list-item>
           </template>
         </v-list>
-
       </div>
     </div>
   </div>
