@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>Login to BuiltRight</h1>
-    <LoginForm></LoginForm>
+    <div class="container">
+      <LoginForm></LoginForm>
+    </div>
   </div>
 
 </template>

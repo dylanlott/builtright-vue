@@ -1,6 +1,6 @@
     <template>
   <div>
-    <h1>Create A New Build</h1>
+    <h1 class="header">Create A New Build</h1>
 
     <v-text-input
       class="build__input"
@@ -94,6 +94,9 @@ export default {
 
 <style lang="stylus">
 @import '../css/theme.styl'
+  .header
+    color: charcoal 
+
   .input-group label
     color: light-blue
 

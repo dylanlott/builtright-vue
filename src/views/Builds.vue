@@ -6,7 +6,7 @@
     <v-content>
 
       <router-link class="routerlink" to="/builds/create">
-        <v-btn router><v-icon>add</v-icon> Add A Build</v-btn>
+        <v-btn router class="primary"><v-icon>add</v-icon> Add A Build</v-btn>
       </router-link>
       <BuildsList></BuildsList>
     </v-content>
