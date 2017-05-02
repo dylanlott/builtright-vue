@@ -28,7 +28,7 @@ export default {
           token: token
         }
       })
-      .then((res) => resolve(res))
+      .then((res) => resolve(res.data))
       .catch((err) => reject(err))
     })
   },

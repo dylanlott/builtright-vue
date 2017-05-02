@@ -20,7 +20,7 @@ const mutations = {
     state.success = false
     state.posts = []
   },
-  [types.GET_POSTS_FAILURE] (state, posts) {
+  [types.GET_POSTS_SUCCESS] (state, posts) {
     state.posts = posts
     state.loading = false
     state.success = true
