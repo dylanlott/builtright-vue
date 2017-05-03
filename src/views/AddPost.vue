@@ -9,26 +9,29 @@
       <div class="addpart__form">
         <form>
           <v-card-row>
-              <v-text-input
-                id="postTitle"
-                name="postTitle"
-                label="Post Title"
-                v-model="post.title"
-                prepend-icon="star"
-              ></v-text-input>
-              <v-text-field
-                id="postBody"
-                name="postBody"
-                label="Post Body"
-                multi-line
-                v-model="post.body"
-              ></v-text-field>
+            <v-text-input
+              id="postTitle"
+              name="postTitle"
+              label="Post Title"
+              v-model="post.title"
+              class="form__title"
+            ></v-text-input>
+          </v-card-row>
+          <v-card-row>
+            <textarea
+              name="postBody"
+              rows="8"
+              cols="100"
+              v-model="post.body"
+              placeholder="Body"
+              class="form-textarea">
+            </textarea>
           </v-card-row>
         </form>
       </div>
       <v-card-row actions>
-        <v-btn flat :to="{name: 'forum'}" class="primary--text">Cancel</v-btn>
-        <v-btn flat v-on:click.native="modal = false" class="primary--text">Submit</v-btn>
+        <v-btn flat class="primary--text" @click.native="goToForum()">Cancel</v-btn>
+        <v-btn flat v-on:click.native="submit()" class="primary--text">Submit</v-btn>
       </v-card-row>
     </v-card>
 </template>
@@ -43,24 +46,48 @@ export default {
     return {
       modal: false,
       post: {
-        title: ''
+        title: '',
+        body: ''
       }
     }
   },
   methods: {
-    addPart: function () {
-      console.log('ADD PART')
+    goToForum () {
+      router.push({ name: 'forum' })
     },
-    closeModal: function () {
-      this.modal = false
+    submit () {
+      console.log('post: ', this.post)
+      this.$state.dispatch('createPost', this.post)
     }
   },
-  components: {
-  }
+  components: {}
 }
 </script>
 
 <style lang="stylus">
 @import '../css/theme.styl'
 
+form
+  font-size: 16px
+
+.addpart__form
+  width: 80%
+  margin: 0 auto
+
+.form-textarea
+  border-color: charcoal
+  margin: 40px auto
+
+.form-textarea
+  outline: charcoal
+  border:1px solid charcoal
+  padding: 8px
+
+.form-textarea:focus
+  outline: charcoal
+  border: 2px solid charcoal
+
+.form__title
+  width: 80%
+  margin: 0 auto
 </style>

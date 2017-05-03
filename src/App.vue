@@ -38,7 +38,7 @@
               <v-list-tile>
                 <v-list-tile-title
                 class="navbar__item">
-                  <router-link :to="{ path: 'login' }" class="navbar__link">
+                  <router-link :to="{ name: 'login' }" class="navbar__link">
                     Login
                   </router-link>
                 </v-list-tile-title>
@@ -107,7 +107,8 @@ export default {
       items: [
       { title: 'Home', href: '/' },
       { title: 'Builds', href: '/builds' },
-      { title: 'Profile', href: '/profile' }
+      { title: 'Profile', href: '/profile' },
+      { title: 'Forum', href: '/forum' }
     ]
     }
   },
@@ -132,9 +133,13 @@ export default {
   @import './css/main.css'
   @import './css/theme.styl'
 
+  body
+    font-size: 16px
+
   #app
     background-color: blue
     padding-bottom: 60px
+
   .content
     margin-top: 0px
     background-color: blue
