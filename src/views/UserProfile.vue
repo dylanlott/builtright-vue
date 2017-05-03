@@ -3,22 +3,13 @@
     <div class="secondary__nav">
       User Profile
     </div>
-    <v-progress-linear v-if="user.user.loading"
-      v-bind:indeterminate="true">
-    </v-progress-linear>
-
-      <v-icon x-large class="grey--text text--darken-2">settings</v-icon>
-
-      <p>
-
-
-      </p>
-      <p>
-
-
-      </p>
+    <div>
       <v-card>
+        <v-card-title>
+
+        </v-card-title>
         <v-card-text>
+          <!-- <v-icon x-large class="grey--text text--darken-2">settings</v-icon> -->
           <v-list>
             <v-list-item>Username: {{user.user.username}}<b></b></v-list-item>
             <v-list-item>Email: {{user.user.email}}<b></b></v-list-item>
@@ -26,27 +17,15 @@
           </v-list>
         </v-card-text>
       </v-card>
-
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-const storage = window.localStorage
 
 export default {
   name: 'userProfile',
-  data () {
-    return {
-      user: {
-        username: '',
-        email: '',
-        builds: [],
-        memberSince: '',
-        lastActive: ''
-      }
-    }
-  },
   computed: mapState({
     user: state => state.user
   }),
@@ -57,4 +36,7 @@ export default {
 </script>
 
 <style lang="stylus">
+.header
+  color: charcoal
+
 </style>

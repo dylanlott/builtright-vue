@@ -33,7 +33,7 @@
               </v-list-tile>
             </v-list-item>
           </v-list>
-          <v-list>
+          <v-list v-if="!user">
             <v-list-item>
               <v-list-tile>
                 <v-list-tile-title
