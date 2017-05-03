@@ -30,10 +30,6 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'forum',
-  data () {
-    return {}
-  },
-  components: {},
   computed: mapState({
     posts: state => state.posts
   }),
