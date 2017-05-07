@@ -130,7 +130,7 @@ export default {
 
 <style lang="stylus">
   @import '../node_modules/vuetify/src/stylus/main'
-  @import './css/main.css'
+  @import './css/main.styl'
   @import './css/theme.styl'
 
   body
