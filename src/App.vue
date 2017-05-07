@@ -25,10 +25,10 @@
                 </v-list-tile-title>
               </v-list-tile>
               <v-list-tile>
-                <v-list-tile-title class="navbar__item" @click.native="logout">
-                  <router-link to="logout" class="navbar__link">
+                <v-list-tile-title class="navbar__item">
+                  <div @click.native="logout()" class="navbar__link">
                     Log Out
-                  </router-link>
+                  </div>
                 </v-list-tile-title>
               </v-list-tile>
             </v-list-item>

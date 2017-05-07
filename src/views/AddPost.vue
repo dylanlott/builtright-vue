@@ -59,8 +59,7 @@ export default {
       console.log('post: ', this.post)
       this.$state.dispatch('createPost', this.post)
     }
-  },
-  components: {}
+  }
 }
 </script>
 

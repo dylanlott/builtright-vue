@@ -2,6 +2,12 @@
   <div>
     <div class="secondary__nav">
       Dashboard / Forum
+
+      <span class="add-post link">
+        <router-link :to="{name: 'addPost'}">
+          Add A Post
+        </router-link>
+      </span>
     </div>
     <div class="posts">
       <div v-if="!posts.data">
@@ -40,9 +46,16 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../css/theme.styl'
+
 .forum
   margin: 20px
 
 .posts
   margin: 20px
+
+.add-post .link
+  display: flex
+  justify-content: right
+  color: charcoal
 </style>

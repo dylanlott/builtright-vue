@@ -3,13 +3,12 @@
     <div class="secondary__nav">
       User Profile
     </div>
-    <div>
+    <div class="profile">
       <v-card>
         <v-card-title>
 
         </v-card-title>
         <v-card-text>
-          <!-- <v-icon x-large class="grey--text text--darken-2">settings</v-icon> -->
           <v-list>
             <v-list-item>Username: {{user.user.username}}<b></b></v-list-item>
             <v-list-item>Email: {{user.user.email}}<b></b></v-list-item>
@@ -39,4 +38,6 @@ export default {
 .header
   color: charcoal
 
+.profile
+  margin-top: -20px
 </style>

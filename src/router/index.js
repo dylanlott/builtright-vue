@@ -14,6 +14,7 @@ import buildDetails from '../views/BuildDetails.vue'
 import addPart from '../views/AddPart.vue'
 import forum from '../views/Forum.vue'
 import addPost from '../views/AddPost.vue'
+import logout from '../views/Logout.vue'
 
 Vue.use(VueRouter)
 
@@ -103,6 +104,13 @@ export const router = new VueRouter({
     component: addPost,
     meta: {
       auth: true
+    }
+  }, {
+    path: '/logout',
+    name: 'logout',
+    component: logout,
+    meta: {
+      auth: false
     }
   }, {
     path: '*',

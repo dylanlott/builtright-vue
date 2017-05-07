@@ -8,20 +8,21 @@ const API_URL = process.env.NODE_ENV==='production'
 
 export default {
   getUser (context) {
+    const url = `${API_URL}/users/${this.getUserId()}`
     return new Promise((resolve, reject) => {
-      axios.get(`${API_URL}/users/` + this.getUserId(), {
+      return axios.get(url, {
         params: {
           token: this.getToken()
         }
       })
-        .then((user) => resolve(user.data.data[0]))
-        .catch((err) => reject(err))
+      .then((user) => resolve(user.data.data[0]))
+      .catch((err) => reject(err))
     })
   },
 
   login (user, context) {
     return new Promise((resolve, reject) => {
-      axios.post(`${API_URL}/auth/local`, user)
+      return axios.post(`${API_URL}/auth/local`, user)
         .then((res) => resolve(res.data))
         .catch((err) => reject(err))
     })
@@ -32,7 +33,6 @@ export default {
       console.log('user', user);
       axios.post(`${API_URL}/users`, user)
         .then((user) => {
-          console.log('login user', user);
           storage.set('token', user.token)
           router.push({ name: 'dashboard' })
           resolve(user.data.data[0])

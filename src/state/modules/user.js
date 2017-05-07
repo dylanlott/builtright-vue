@@ -38,8 +38,6 @@ const mutations = {
     state.user.id = user.user_id
   },
   [types.LOGOUT_USER] (state) {
-    localStorage.removeItem('user_id')
-    localStorage.removeItem('token')
     state.token = null
     state.user = {}
   },
@@ -87,8 +85,10 @@ const actions = {
     return localStorage.getItem('token')
   },
   logoutUser ({commit, state}) {
+    console.log('logoutUser module')
+    localStorage.removeItem('token')
     commit(types.LOGOUT_USER)
-    router.push('/')
+    router.push({ name: 'landing' })
   },
   getUserInfo ({commit, state}) {
     commit(types.RECEIVE_USER_INFO)

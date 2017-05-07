@@ -43,12 +43,6 @@ const storage = window.localStorage
 
 export default {
   name: 'buildsList',
-  data () {
-    return {
-      user: {},
-      builds: []
-    }
-  },
   computed: mapState({
     user: state => state.user,
     builds: state => state.builds
