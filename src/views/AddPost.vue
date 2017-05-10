@@ -38,7 +38,8 @@
 
 <script>
 import { router } from '../router/index'
-import { mapDispatch } from 'vuex'
+import { mapState, mapDispatch } from 'vuex'
+const moment = require('moment')
 
 export default {
   name: 'AddPost',
@@ -51,11 +52,17 @@ export default {
       }
     }
   },
+  computed: mapState({
+    user: state => state.user
+  }),
   methods: {
     goToForum () {
       router.push({ name: 'forum' })
     },
     submit () {
+      this.post.date = moment().format('YYYY-MM-DD HH:m:s')
+      this.post.user = user
+      this.post.type = 'forum'
       console.log('post: ', this.post)
       this.$state.dispatch('createPost', this.post)
     }

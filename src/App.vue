@@ -80,13 +80,22 @@
         </v-container>
       </v-content>
     </main>
-    <v-footer class="footer">
-      <span>Copyright 2017 Hivemind Print and Design</span>
-      <span><a href="reddit.com/r/builtright" target="__blank">Reddit</a></span>
-      <span><a href="www.facebook.com/builtrightapp" target="__blank">Facebook</a></span>
-      <span><a href="www.instagram.com/builtrightapp" target="__blank">Instagram</a></span>
-      <span>Report a Bug</span>
-    </v-footer>
+    <v-card height="200px">
+      <v-bottom-nav absolute value="true" class="transparent">
+        <v-btn flat light class="teal--text" @click.native="e1 = 1" :value="e1 === 1">
+          <span>Recents</span>
+          <v-icon>history</v-icon>
+        </v-btn>
+        <v-btn flat light class="teal--text" @click.native="e1 = 2" :value="e1 === 2">
+          <span>Favorites</span>
+          <v-icon>favorite</v-icon>
+        </v-btn>
+        <v-btn flat light class="teal--text" @click.native="e1 = 3" :value="e1 === 3">
+          <span>Nearby</span>
+          <v-icon>place</v-icon>
+        </v-btn>
+      </v-bottom-nav>
+    </v-card>
   </v-app>
 </template>
 
