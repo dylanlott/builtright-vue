@@ -1,15 +1,6 @@
 <template>
-  <!-- <v-app> -->
-
-  <!-- </v-app> -->
-
   <v-app id="sidebar-example-1" class="elevation-1" top-toolbar left-fixed-sidebar>
-  <header>
-    <v-toolbar>
-      <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
-      <v-toolbar-logo>Logo</v-toolbar-logo>
-    </v-toolbar>
-  </header>
+
   <main>
     <v-sidebar v-model="sidebar" fixed>
       <v-list dense>
@@ -28,7 +19,7 @@
     <v-content>
       <v-container fluid>
         <Navbar></Navbar>
-          <router-view></router-view>
+        <router-view></router-view>
       </v-container>
     </v-content>
   </main>
@@ -51,11 +42,11 @@ export default {
     return {
       sidebar: false,
       items: [
-      { title: 'Home', href: '/' },
-      { title: 'Builds', href: '/builds' },
-      { title: 'Profile', href: '/profile' },
-      { title: 'Forum', href: '/forum' }
-    ]
+        { title: 'Home', href: '/', avatar: '' },
+        { title: 'Builds', href: '/builds', avatar: '' },
+        { title: 'Profile', href: '/profile', avatar: '' },
+        { title: 'Forum', href: '/forum', avatar: '' }
+      ]
     }
   },
   methods: {
@@ -90,7 +81,7 @@ export default {
     margin-top: 0px
     background-color: blue
 
-  .toolbar__main
+  /*.toolbar__main
     margin-bottom: 12px
     background-color: orange
   .navbar__item
@@ -141,5 +132,5 @@ export default {
 
   .container-app
     width: 85%
-    margin: 0 auto
+    margin: 0 auto*/
 </style>

@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="secondary__nav">
-      Dashboard
-    </div>
-
     <div class="card__basic">
       <v-card>
         <v-card-text>
@@ -15,7 +11,7 @@
                <v-card-column class="green white--text">
                  <v-card-row>
                    <v-spacer></v-spacer>
-                   <v-card-text class="text-xs-right">
+                   <v-card-text>
                      <strong>Start a new build</strong>
                      <div></div>
                    </v-card-text>
