@@ -1,13 +1,16 @@
 <template>
   <v-app>
-    <router-view></router-view>
+    <Navbar></Navbar>
+    <div class="container-app">
+      <router-view></router-view>
+    </div>
   </v-app>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { router } from './router/index'
-import AlertSystem from './components/AlertSystem.vue'
+import Navbar from './components/Navbar.vue'
 
 export default {
   name: 'builtright',
@@ -37,7 +40,7 @@ export default {
     }
   },
   components: {
-    AlertSystem
+    Navbar
   }
 }
 </script>
@@ -106,4 +109,8 @@ export default {
     bottom: 0
     left: 0
     width: 100%
+
+  .container-app
+    width: 85%
+    margin: 0 auto
 </style>
