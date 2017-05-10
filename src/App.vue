@@ -1,10 +1,39 @@
 <template>
-  <v-app>
-    <Navbar></Navbar>
-    <div class="container-app">
-      <router-view></router-view>
-    </div>
-  </v-app>
+  <!-- <v-app> -->
+
+  <!-- </v-app> -->
+
+  <v-app id="sidebar-example-1" class="elevation-1" top-toolbar left-fixed-sidebar>
+  <header>
+    <v-toolbar>
+      <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
+      <v-toolbar-logo>Logo</v-toolbar-logo>
+    </v-toolbar>
+  </header>
+  <main>
+    <v-sidebar v-model="sidebar" fixed>
+      <v-list dense>
+        <v-list-item v-for="(item,i) in items" :key="i">
+          <v-list-tile>
+            <v-list-tile-avatar>
+              <v-icon>{{ item.avatar }}</v-icon>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="item.title" />
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-item>
+      </v-list>
+    </v-sidebar>
+    <v-content>
+      <v-container fluid>
+        <Navbar></Navbar>
+          <router-view></router-view>
+      </v-container>
+    </v-content>
+  </main>
+</v-app>
+
 </template>
 
 <script>

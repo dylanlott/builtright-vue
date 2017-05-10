@@ -1,24 +1,13 @@
 <template lang="html">
-  <b-navbar toggleable type="inverse" variant="success" class="navbar">
 
-   <b-link class="navbar-brand" :to="{ name: 'dashboard' }">
-     <span>BuiltRight</span>
-   </b-link>
 
-   <b-link class="nav navbar__link">Builds</b-link>
-   <b-link class="nav navbar__link">Forum</b-link>
-   <b-link class="nav navbar__link">Profile</b-link>
-
- </b-navbar>
 </template>
 
 <script>
 export default {
   name: 'Navbar',
   methods: {
-    toggleNav () {
 
-    }
   }
 }
 </script>
