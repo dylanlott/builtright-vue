@@ -1,20 +1,32 @@
 <template>
-  <v-app id="sidebar-example-1" class="elevation-1" top-toolbar left-fixed-sidebar>
-
+<v-app id="builtright-app" class="elevation-1" name="builtright-app" top-toolbar left-fixed-sidebar>
+  <header>
+    <v-toolbar class="v-navbar">
+      <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
+      <v-toolbar-logo class="logo">
+        <img src="./img/logo-horizontal.png" alt="" height="50" class="app-logo">
+      </v-toolbar-logo>
+    </v-toolbar>
+  </header>
   <main>
-    <v-sidebar v-model="sidebar" fixed>
-      <v-list dense>
-        <v-list-item v-for="(item,i) in items" :key="i">
-          <v-list-tile>
-            <v-list-tile-avatar>
-              <v-icon>{{ item.avatar }}</v-icon>
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="item.title" />
-            </v-list-tile-content>
-          </v-list-tile>
+    <v-sidebar v-model="sidebar" fixed id="sidebar-main" name="sidebarmenu" class="sidebar-main">
+
+      <v-list subheader name="menuList">
+        <v-subheader name="menuTitle">Menu</v-subheader>
+        <v-list-item name="sidebarMenuList" v-for="item in items" v-bind:key="item.title">
+          <router-link class="menu-link" :to="{ name: item.link }">
+            <v-list-tile avatar>
+              <v-list-tile-avatar name="itemAvatar">
+                <v-icon name="itemAvatarIcon">{{ item.avatar }}</v-icon>
+              </v-list-tile-avatar>
+              <v-list-tile-content name="itemContent">
+                <v-list-tile-title name="itemTitle" v-html="item.title" />
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
         </v-list-item>
       </v-list>
+
     </v-sidebar>
     <v-content>
       <v-container fluid>
@@ -24,12 +36,15 @@
     </v-content>
   </main>
 </v-app>
-
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { router } from './router/index'
+import {
+  mapState
+} from 'vuex'
+import {
+  router
+} from './router/index'
 import Navbar from './components/Navbar.vue'
 
 export default {
@@ -38,29 +53,55 @@ export default {
     user: state => state.user,
     admin: state => state.admin
   }),
-  data () {
+  data() {
     return {
       sidebar: false,
-      items: [
-        { title: 'Home', href: '/', avatar: '' },
-        { title: 'Builds', href: '/builds', avatar: '' },
-        { title: 'Profile', href: '/profile', avatar: '' },
-        { title: 'Forum', href: '/forum', avatar: '' }
+      items: [{
+          title: 'Dashboard',
+          avatar: 'dashboard',
+          auth: true,
+          link: 'dashboard'
+        },
+        {
+          title: 'Forum',
+          avatar: '',
+          auth: false,
+          link: 'forum'
+        },
+        {
+          title: 'Builds',
+          avatar: '',
+          auth: true,
+          link: 'builds'
+        },
+        {
+          title: 'Login',
+          avatar: 'user',
+          auth: false,
+          link: 'login'
+        },
+        {
+          title: 'Sign Up',
+          avatar: '',
+          auth: false,
+          link: 'signup'
+        }
       ]
     }
   },
   methods: {
-    logout () {
+    logout() {
       this.$store.dispatch('logoutUser')
     },
-    goToDashboard () {
+    goToDashboard() {
       if (state.user) {
         router.push('dashboard')
       }
     }
   },
   components: {
-    Navbar
+    Navbar,
+
   }
 }
 </script>
@@ -81,56 +122,10 @@ export default {
     margin-top: 0px
     background-color: blue
 
-  /*.toolbar__main
-    margin-bottom: 12px
-    background-color: orange
-  .navbar__item
-    width: 100%
-    font-size: 26px
-
-  .navbar__link
-    text-decoration: none
-    color: blue
-    font-size: 16px
-    &:hover
-      color: darker-gray
-
-  .sidebar
-    background-color: blue
-
-  .sidebar__link
+  .sidebar-main
     color: #fff
+
+  .menu-link
     text-decoration: none
-    font-size: 26px
-
-  .sidebar__img
-    height: 100px
-    width: auto
-
-  .sidebar__close
-    float: right
-    height: 30px
-    width: 30px
-    text-align: center
-    padding-top: 3px
-    border-radius: 20px
-    background-color: lighten(blue, 10)
-    &:hover
-      background-color: lighten(blue, 2)
-      cursor: pointer
-
-  .sidebar__icon
-    color: gray
-
-  .footer
-    background-color: darken(blue, 7.5)
-    color: darken(gray, 20)
-    position: absolute
-    bottom: 0
-    left: 0
-    width: 100%
-
-  .container-app
-    width: 85%
-    margin: 0 auto*/
+    
 </style>

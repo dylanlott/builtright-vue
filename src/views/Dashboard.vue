@@ -4,48 +4,7 @@
       <v-card>
         <v-card-text>
           <div>
-            <!-- <h3 class="card__title display-4">My Builds</h3> -->
-
-            <div>
-              <v-card horizontal>
-               <v-card-column class="green white--text">
-                 <v-card-row>
-                   <v-spacer></v-spacer>
-                   <v-card-text>
-                     <strong>Start a new build</strong>
-                     <div></div>
-                   </v-card-text>
-                 </v-card-row>
-               </v-card-column>
-               <!-- <v-card-row img="/public/doc-images/cards/store.jpg" height="125px"></v-card-row> -->
-             </v-card>
-
-             <v-card horizontal>
-               <v-card-column class="orange white--text">
-                 <v-card-row>
-                   <v-spacer></v-spacer>
-                   <v-card-text class="text-xs-right">
-                     <strong>Browse other builds</strong>
-                     <div></div>
-                   </v-card-text>
-                 </v-card-row>
-               </v-card-column>
-               <!-- <v-card-row img="/public/doc-images/cards/store.jpg" height="125px"></v-card-row> -->
-             </v-card>
-
-             <v-card horizontal>
-                <v-card-column class="blue white--text">
-                  <v-card-row>
-                    <v-spacer></v-spacer>
-                    <v-card-text class="text-xs-right">
-                      <strong>Shop for parts</strong>
-                      <div></div>
-                    </v-card-text>
-                  </v-card-row>
-                </v-card-column>
-                <!-- <v-card-row img="/public/doc-images/cards/store.jpg" height="125px"></v-card-row> -->
-              </v-card>
-            </div>
+            <h1>Home</h1>
           </div>
         </v-card-text>
       </v-card>
@@ -54,21 +13,19 @@
 
 </template>
 
-
 <script>
 import CreateBuildForm from '../components/CreateBuildForm.vue'
 import { mapState } from 'vuex'
-
-const storage = window.localStorage
 
 export default {
   name: 'dashboard',
   computed: mapState({
     user: state => state.user,
-    builds: state => state.builds
+    builds: state => state.builds,
+    posts: state => state.posts
   }),
   created: function() {
-    this.$store.dispatch('getBuildsForUser', storage.getItem('user_id'))
+    this.$store.dispatch('getBuildsForUser', this.user.user_id)
   },
   data () {
     return {

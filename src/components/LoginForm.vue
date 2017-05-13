@@ -1,25 +1,25 @@
 <template>
   <div>
     <div class="well">
-      <v-text-input
+      <v-text-field
         id="Email"
         name="Email"
         label="Email"
         v-model="user.email"
         required
-      ></v-text-input>
+      ></v-text-field>
 
-      <v-text-input
+      <v-text-field
         id="Password"
         name="Password"
         type="password"
         label="Password"
         v-model="user.password"
         required
-      ></v-text-input>
+      ></v-text-field>
 
       <div>
-        <v-btn raised primary class="button__login" @click.native='submit()'>Login</v-btn>
+        <v-btn name="loginsubmit" raised primary class="button__login" @click.native='submit()'>Login</v-btn>
         <p>Not a member yet? <a href="/signup">Sign up here</a>.</p>
       </div>
 

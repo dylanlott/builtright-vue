@@ -1,19 +1,14 @@
 <template>
   <div>
-    <div class="header__container">
-      <h1>BuiltRight</h1>
-      <h3 class="tagline">The #1 car modification and project car community.</h3>
-      <SignUpForm></SignUpForm>
-    </div>
+    <h3 class="tagline">The #1 car modification and project car community.</h3>
   </div>
 </template>
 
 <script>
-import SignUpForm from '../components/SignUpForm.vue'
 
 export default {
   name: 'landing',
-  components: { SignUpForm }
+  components: { }
 }
 </script>
 
