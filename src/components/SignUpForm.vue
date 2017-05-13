@@ -2,21 +2,21 @@
   <div>
     <div class="form__signup well">
       <div class="inputs">
-        <v-text-input
+        <v-text-field
           id="Email"
           name="Email"
           label="Email"
           v-model="user.email"
           required
-        ></v-text-input>
-        <v-text-input
+        ></v-text-field>
+        <v-text-field
           id="Password"
           name="Password"
           type="password"
           label="Password"
           v-model="user.password"
           required
-        ></v-text-input>
+        ></v-text-field>
       </div>
       <v-btn primary class="button__signup" @click.native="submit()">
         Sign Up

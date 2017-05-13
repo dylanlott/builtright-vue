@@ -26,7 +26,6 @@
               </v-list-tile-content>
             </v-list-tile>
           </router-link>
-
         </v-list-item>
 
         <v-list-item v-if="user.token" :click="logout()">
@@ -39,6 +38,7 @@
             </v-list-tile-content>
           </v-list-tile>
         </v-list-item>
+
         <v-list-item v-if="user.token">
           <router-link :to="{ name: 'profile' }">
             <v-list-tile avatar>
