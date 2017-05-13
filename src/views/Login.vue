@@ -1,9 +1,16 @@
 <template>
   <div>
-    <h1>Login to BuiltRight</h1>
-    <div class="container">
-      <LoginForm></LoginForm>
-    </div>
+
+    <v-container fluid="fluid">
+      <v-row class="text-xs-center">
+        <v-col xs12>
+          <h1 class="tagline text-xs-center">Login</h1>
+          <v-col xs12 md4 offset-md4>
+            <LoginForm></LoginForm>
+          </v-col>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 
 </template>

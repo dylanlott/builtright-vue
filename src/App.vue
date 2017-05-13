@@ -98,7 +98,6 @@
     </v-sidebar>
     <v-content>
       <v-container fluid>
-        <Navbar></Navbar>
         <router-view></router-view>
       </v-container>
     </v-content>
