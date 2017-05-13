@@ -49,8 +49,8 @@ const actions = {
   getPosts ({commit, state}) {
     commit(types.GET_POSTS_REQUEST)
     return posts.getPosts()
-      .then((posts) => {
-        console.log('posts', posts)
+      .then((res) => {
+        const posts = res.data
         commit(types.GET_POSTS_SUCCESS, posts)
         return posts
       })

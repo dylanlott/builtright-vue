@@ -3,8 +3,38 @@
     <div class="card__basic">
       <v-card>
         <v-card-text>
-          <div>
-            <h1>Home</h1>
+          <h3>Recent Builds</h3>
+
+          <template v-for="build in builds.data">
+            <v-list-item>
+              <v-list-tile>
+                <v-list-tile-content>
+                  <v-list-tile-title v-html="builds.title" />
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list-item>
+          </template>
+          <div v-if="!builds.data">
+            No recent builds. <router-link :to="{ name: 'addBuild' }"
+          </div>
+        </v-card-text>
+      </v-card>
+
+      <v-card>
+        <v-card-text>
+          <h3>Recent posts</h3>
+          <template v-for="post in posts.posts">
+            <v-list-item>
+              <v-list-tile>
+                <v-list-tile-content>
+                  <v-list-tile-title v-html="post.title" />
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list-item>
+          </template>
+
+          <div v-if="!posts.posts[0]">
+            No posts or comments to show.
           </div>
         </v-card-text>
       </v-card>
