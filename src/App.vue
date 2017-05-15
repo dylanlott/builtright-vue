@@ -15,6 +15,9 @@
           <img src="./img/logo-horizontal.png" alt="builtright logo" height="25">
         </v-subheader>
 
+        <v-subheader>
+          {{user.user_id}}
+        </v-subheader>
         <v-list-item v-if="user.token" name="sidebarMenuList" v-for="item in authed" v-bind:key="item.title">
           <router-link class="menu-link" :to="{ name: item.link }">
             <v-list-tile avatar>
@@ -28,7 +31,7 @@
           </router-link>
         </v-list-item>
 
-        <v-list-item v-if="user.token" :click="logout()">
+        <v-list-item v-if="user.token">
           <v-list-tile avatar>
             <v-list-tile-avatar name="itemAvatar">
               <v-icon name="itemAvatarIcon">clear</v-icon>
@@ -37,19 +40,6 @@
               <v-list-tile-title name="itemTitle">Logout</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-        </v-list-item>
-
-        <v-list-item v-if="user.token">
-          <router-link :to="{ name: 'profile' }">
-            <v-list-tile avatar>
-              <v-list-tile-avatar name="itemAvatar">
-                <v-icon name="itemAvatarIcon">clear</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content name="itemContent">
-                <v-list-tile-title name="itemTitle">User Profile</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
         </v-list-item>
 
         <v-list-item v-if="!user.token">
@@ -138,7 +128,7 @@ export default {
           link: 'builds'
         },
         {
-          title: 'Settings',
+          title: 'User Profile',
           avatar: 'account_box',
           link: 'profile'
         }
@@ -157,10 +147,6 @@ export default {
     }
   },
   methods: {
-    logout() {
-      console.log('logout fired')
-      this.$store.dispatch('logoutUser')
-    },
     goToDashboard() {
       if (state.user) {
         router.push('dashboard')
@@ -179,13 +165,13 @@ export default {
   body
     font-size: 16px
 
-  #app
-    background-color: blue
+  #builtright-app
     padding-bottom: 60px
+    color: charcoal
 
   .content
     margin-top: 0px
-    background-color: blue
+    background-color: white
 
   .sidebar-main
     color: #fff

@@ -2,50 +2,50 @@
   <div>
     <h1 class="header">Create A New Build</h1>
 
-    <v-text-input
+    <v-text-field
       class="build__input"
       id="Build Name"
       name="Build Name"
       label="Build Name"
       v-model="build.name"
       required
-    ></v-text-input>
+    ></v-text-field>
 
-    <v-text-input
+    <v-text-field
       class="build__input"
       id="Build make"
       name="Build make"
       label="Build make"
       v-model="build.make"
       required
-    ></v-text-input>
+    ></v-text-field>
 
-    <v-text-input
+    <v-text-field
       class="build__input"
       id="Build Model"
       name="Build Model"
       label="Build Model"
       v-model="build.model"
       required
-    ></v-text-input>
+    ></v-text-field>
 
-    <v-text-input
+    <v-text-field
       class="build__input"
       id="Build Year"
       name="Build Year"
       label="Build Year"
       v-model="build.year"
       required
-    ></v-text-input>
+    ></v-text-field>
 
-    <v-text-input
+    <v-text-field
       class="build__input"
       id="Build Trim"
       name="Build Trim"
       label="Build Trim"
       v-model="build.trim"
       required
-    ></v-text-input>
+    ></v-text-field>
 
     <div>
       <v-btn raised @click.native='submit()' class="build__btn">Create Build</v-btn>
@@ -95,7 +95,7 @@ export default {
 <style lang="stylus">
 @import '../css/theme.styl'
   .header
-    color: charcoal 
+    color: charcoal
 
   .input-group label
     color: light-blue

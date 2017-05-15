@@ -4,7 +4,8 @@
     <v-container fluid="fluid">
       <v-row class="text-xs-center">
         <v-col xs12>
-          <h1 class="tagline text-xs-center">Login</h1>
+          <h1 class="text-xs-center">Login</h1>
+          <h3>{{message}}</h3>
           <v-col xs12 md4 offset-md4>
             <LoginForm></LoginForm>
           </v-col>
@@ -24,7 +25,7 @@ import {router} from '../router/index.js'
     name: 'login',
     data () {
       return {
-        message: 'Enter your information'
+        message: 'Login to BuiltRight'
       }
     },
     created () {
@@ -37,9 +38,4 @@ import {router} from '../router/index.js'
 </script>
 
 <style lang="stylus">
-  @import '../css/theme.styl'
-
-  h1 {
-    color: white
-  }
 </style>

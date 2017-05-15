@@ -67,6 +67,8 @@ const actions = {
       .then((res) => {
         console.log('create post: ', res)
         commit(types.CREATE_POST_SUCCESS)
+        // fire off toast
+        router.push({ name: 'forum' })
         return res
       })
       .catch((err) => {

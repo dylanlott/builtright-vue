@@ -2,13 +2,12 @@
   <div>
     <div class="secondary__nav">
       Dashboard / Forum
-
-      <span class="add-post link">
-        <router-link :to="{name: 'addPost'}">
-          Add A Post
-        </router-link>
-      </span>
     </div>
+    <router-link :to="{ name: 'addPost' }">
+      <v-btn name="addPost" raised success floating>
+        <v-icon>create</v-icon>
+      </v-btn>
+    </router-link>
     <div class="posts">
       <div v-if="!posts.data">
         <p style="color: #fff">There are no posts to show here.</p>
@@ -28,6 +27,7 @@
         </v-list>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -54,8 +54,4 @@ export default {
 .posts
   margin: 20px
 
-.add-post .link
-  display: flex
-  justify-content: right
-  color: charcoal
 </style>

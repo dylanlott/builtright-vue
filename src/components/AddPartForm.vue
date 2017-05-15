@@ -9,44 +9,44 @@
       <div class="addpart__form">
         <form>
         <v-card-row>
-            <v-text-input
+            <v-text-field
               id="partName"
               name="partName"
               label="Part Name"
               v-model="part.name"
-            ></v-text-input>
+            ></v-text-field>
         </v-card-row>
         <v-card-row>
-          <v-text-input
+          <v-text-field
             id="websiteURL"
             name="websiteURL"
             label="Website / URL to buy the part at"
             v-model="part.url"
-          ></v-text-input>
+          ></v-text-field>
         </v-card-row>
         <v-card-row>
-          <v-text-input
+          <v-text-field
             id="test2"
             name="test2"
             label="Part brand"
             v-model="part.brand"
-          ></v-text-input>
+          ></v-text-field>
         </v-card-row>
         <v-card-row>
-          <v-text-input
+          <v-text-field
             id="test2"
             name="test2"
             label="Part model"
             v-model="part.model"
-          ></v-text-input>
+          ></v-text-field>
         </v-card-row>
         <v-card-row>
-          <v-text-input
+          <v-text-field
             id="test2"
             name="test2"
             label="Price"
             v-model="part.price"
-          ></v-text-input>
+          ></v-text-field>
         </v-card-row>
         </form>
       </div>

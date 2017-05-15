@@ -9,23 +9,21 @@
       <div class="addpart__form">
         <form>
           <v-card-row>
-            <v-text-input
+            <v-text-field
               id="postTitle"
               name="postTitle"
               label="Post Title"
               v-model="post.title"
               class="form__title"
-            ></v-text-input>
+            ></v-text-field>
           </v-card-row>
           <v-card-row>
-            <textarea
-              name="postBody"
-              rows="8"
-              cols="100"
-              v-model="post.body"
-              placeholder="Body"
-              class="form-textarea">
-            </textarea>
+            <v-text-field
+             name="postText"
+             label="Body"
+             v-model="post.text"
+             multi-line
+            ></v-text-field>
           </v-card-row>
         </form>
       </div>
@@ -61,10 +59,12 @@ export default {
     },
     submit () {
       this.post.date = moment().format('YYYY-MM-DD HH:m:s')
-      this.post.user = user
+      this.post.user = this.user.user_id
       this.post.type = 'forum'
+      this.post.published = true
       console.log('post: ', this.post)
-      this.$state.dispatch('createPost', this.post)
+      this.$store.dispatch('createPost', this.post)
+      //fire off toast
     }
   }
 }

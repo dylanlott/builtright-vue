@@ -78,14 +78,13 @@ const actions = {
       })
       .catch((err) => {
         console.log('err logging in user:', err);
-        reject(err)
+        throw new Error(err)
       })
   },
   getAuthToken ({commit, state}) {
     return localStorage.getItem('token')
   },
   logoutUser ({commit, state}) {
-    console.log('logoutUser module')
     localStorage.removeItem('token')
     commit(types.LOGOUT_USER)
     router.push({ name: 'landing' })
