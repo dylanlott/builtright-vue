@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "linter": "./node_modules/.bin/standard ./src/**/*.js",
     "pushprod": "npm run linter && fly deploy:prod",
-    "pushdev": "npm run linter && fly deploy:dev"
+    "pushdev": "npm run linter && fly deploy:dev",
+    "deploy": "git push deploy master"
   },
   "dependencies": {
     "axios": "^0.15.3",
