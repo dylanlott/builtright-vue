@@ -9,7 +9,6 @@ import axios from 'axios'
 const storage = window.localStorage
 
 axios.interceptors.response.use(undefined, function (err) {
-  console.log(err.message)
   if (err.message === 'Request failed with status code 401') {
     storage.clear()
     router.push({ name: 'login' })

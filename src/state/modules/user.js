@@ -59,9 +59,10 @@ const mutations = {
     state.success = true
     state.user = user
   },
-  [types.RECEIVE_USER_FAILURE] (state, user) {
+  [types.RECEIVE_USER_FAILURE] (state, errors) {
    state.loading = false
    state.success = false
+   state.errors = errors
  }
 }
 
@@ -85,15 +86,15 @@ const actions = {
     return localStorage.getItem('token')
   },
   logoutUser ({commit, state}) {
-    localStorage.removeItem('token')
+    localStorage.clear()
     commit(types.LOGOUT_USER)
     router.push({ name: 'landing' })
+    location.reload()
   },
   getUserInfo ({commit, state}) {
     commit(types.RECEIVE_USER_INFO)
     return api.getUser()
       .then((user) => {
-        console.log('GET USER INFO: ', user)
         commit(types.RECEIVE_USER_SUCCESS, user)
         return user;
       })
@@ -105,7 +106,13 @@ const actions = {
   signup ({commit, state}, user) {
     commit(types.SIGNUP_USER_REQUEST)
     return api.signup(user)
-      .then((user) => resolve(user))
+      .then((user) => {
+        commit(types.SIGNUP_USER_SUCCESS, user)
+        return user
+      })
+      .catch((err) => {
+        commit(types.SIGNUP_USER_FAILURE, err)
+      })
   }
 }
 

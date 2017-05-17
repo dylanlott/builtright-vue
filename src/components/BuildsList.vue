@@ -48,7 +48,7 @@ export default {
     builds: state => state.builds
   }),
   created () {
-    this.$store.dispatch('getBuildsForUser', storage.getItem('user_id'))
+    this.$store.dispatch('getBuildsForUser', this.user.user_id)
     this.$store.dispatch('getUserInfo')
   }
 }

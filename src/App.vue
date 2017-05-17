@@ -3,21 +3,22 @@
   <header>
     <v-toolbar>
       <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
-      <v-toolbar-logo class="logo">
+      <!-- <v-toolbar-logo class="logo">
         <img src="./img/logo-horizontal.png" alt="" height="50" class="app-logo">
-      </v-toolbar-logo>
+      </v-toolbar-logo> -->
+      <div class="white--text">
+        {{ user.user_id }}
+      </div>
     </v-toolbar>
   </header>
   <main>
     <v-sidebar v-model="sidebar" fixed id="sidebar-main" name="sidebarmenu" class="sidebar-main">
       <v-list subheader name="menuList">
-        <v-subheader>
-          <img src="./img/logo-horizontal.png" alt="builtright logo" height="25">
-        </v-subheader>
-
-        <v-subheader>
-          {{user.user_id}}
-        </v-subheader>
+        <router-link :to="{ name: 'dashboard' }">
+          <v-subheader>
+            <img src="./img/logo-horizontal.png" alt="builtright logo" height="25">
+          </v-subheader>
+        </router-link>
         <v-list-item v-if="user.token" name="sidebarMenuList" v-for="item in authed" v-bind:key="item.title">
           <router-link class="menu-link" :to="{ name: item.link }">
             <v-list-tile avatar>
@@ -31,7 +32,7 @@
           </router-link>
         </v-list-item>
 
-        <v-list-item v-if="user.token">
+        <v-list-item v-if="user.token" @click="logout()">
           <v-list-tile avatar>
             <v-list-tile-avatar name="itemAvatar">
               <v-icon name="itemAvatarIcon">clear</v-icon>
@@ -151,7 +152,13 @@ export default {
       if (state.user) {
         router.push('dashboard')
       }
+    },
+    logout () {
+      this.$store.dispatch('logoutUser')
     }
+  },
+  watch: {
+
   },
   components: {}
 }
