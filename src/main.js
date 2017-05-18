@@ -6,6 +6,8 @@ import store from './state/index.js'
 import user from './api/user'
 import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
+import VueSweetAlert from 'vue-sweetalert'
+
 const storage = window.localStorage
 
 axios.interceptors.response.use(undefined, function (err) {
@@ -17,6 +19,7 @@ axios.interceptors.response.use(undefined, function (err) {
 
 Vue.use(Vuetify)
 Vue.use(BootstrapVue)
+Vue.use(VueSweetAlert)
 
 router.beforeEach((to, from, next) => {
   (to.meta.auth && !user.checkAuth() && user.checkAuth() !== undefined)

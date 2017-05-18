@@ -154,6 +154,7 @@ export default {
       }
     },
     logout () {
+      this.$swal('You\'ve been logged out!')
       this.$store.dispatch('logoutUser')
     }
   },

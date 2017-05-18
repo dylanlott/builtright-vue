@@ -2,8 +2,11 @@
   <v-container fluid="fluid">
     <v-row class="text-xs-center">
       <v-col xs12>
-        <h3 class="tagline text-xs-center">{{message}}</h3>
-        <v-col xs12 md4 offset-md4>
+        <v-col xs12>
+        </v-col>
+        <v-col xs12 md6 offset-md3>
+          <h1>Sign up for BuiltRight</h1>
+          <h3>Join the #1 car modification community</h3>
           <SignUpForm></SignUpForm>
         </v-col>
       </v-col>
@@ -17,7 +20,6 @@
     name: 'signup',
     data () {
       return {
-        message: 'The #1 way to showcase your modified cars'
       }
     },
     components: { SignUpForm }
@@ -27,4 +29,7 @@
 <style lang="stylus">
 .tagline
   color: #fff
+
+.heading
+  text-align: center
 </style>
