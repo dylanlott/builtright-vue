@@ -14,18 +14,17 @@ export default {
    * @param  {Object}  context vue context
    * @return {Array} Array of Build objects
    */
-  getBuilds (user, context) {
+  getBuildsByUser (user, skip, limit, context) {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/builds`, {
         params: {
           token: token,
-          owner: this.getUserId()
+          owner: user,
+          limit: limit,
+          skip: skip
         }
       })
-      .then((res) => {
-        console.log('builds res', res);
-        return resolve(res)
-      })
+      .then((res) => resolve(res))
       .catch((err) => reject(err))
     })
   },
@@ -52,7 +51,6 @@ export default {
   createBuild (build, context) {
     return new Promise((resolve, reject) => {
       const url = API_URL + '/builds'
-
       axios.post(url, build, {
         params: {
           token: build.token
@@ -63,10 +61,12 @@ export default {
     })
   },
 
-  getAllBuilds (build, context) {
+  getAllBuilds (skip, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        limit: 10
+        limit: 10,
+        skin: skip,
+        token: token
       }
       axios.get('/builds', params)
         .then((builds) => resolve(builds.data))

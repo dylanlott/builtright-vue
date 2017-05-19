@@ -3,9 +3,9 @@
   <header>
     <v-toolbar>
       <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
-      <!-- <v-toolbar-logo class="logo">
+      <v-toolbar-logo class="logo hidden-lg-and-up">
         <img src="./img/logo-horizontal.png" alt="" height="50" class="app-logo">
-      </v-toolbar-logo> -->
+      </v-toolbar-logo>
       <div class="white--text">
         {{ user.user_id }}
       </div>
@@ -84,7 +84,6 @@
           </router-link>
         </v-list-item>
 
-
       </v-list>
     </v-sidebar>
     <v-content>
@@ -112,6 +111,8 @@ export default {
   }),
   data() {
     return {
+      show: false,
+      loggedIn: false,
       sidebar: false,
       authed: [{
           title: 'Dashboard',
@@ -158,11 +159,20 @@ export default {
       this.$store.dispatch('logoutUser')
     }
   },
-  watch: {
-
-  },
-  components: {}
+  // watch: {
+  //   '$route': () => {
+  //     console.log('route', this)
+  //     update()
+  //   }
+  // }
 }
+
+// function update () {
+//   if (user.token) {
+//     return this,loggedIn = true
+//   }
+//   return this.loggedIn = false
+// }
 </script>
 
 <style lang="stylus">
@@ -186,5 +196,8 @@ export default {
 
   .menu-link
     text-decoration: none
+
+  #logo
+    margin-left: 28px
 
 </style>

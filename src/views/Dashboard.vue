@@ -55,7 +55,7 @@ export default {
     posts: state => state.posts
   }),
   created: function() {
-    this.$store.dispatch('getBuildsForUser', this.user.user_id)
+    this.$store.dispatch('getBuildsByUser', this.user.user_id)
   },
   data () {
     return {

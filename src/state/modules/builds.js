@@ -89,9 +89,9 @@ const mutations = {
 }
 
 const actions = {
-  getBuildsForUser ({commit, state}, user) {
+  getBuildsByUser ({commit, state}, user, skip, limit) {
     commit(types.GET_BUILDS_REQUEST)
-    return builds.getBuilds(user)
+    return builds.getBuildsByUser(user, skip, limit)
       .then((res) => {
         const builds = res.data
         commit(types.GET_BUILDS_SUCCESS, builds)
@@ -140,6 +140,15 @@ const actions = {
         commit(types.GET_PARTS_FAILURE)
         return err
       })
+  },
+  getAllBuilds ({commit, state}, skip) {
+    commit(types.GET_BUILDS_REQUEST)
+    return builds.getAllBuilds(skip)
+      .then((builds) => {
+        commit(types.GET_BUILDS_SUCCESS, builds)
+        return builds
+      })
+      .catch((err) => commit(types.GET_BUILDS_FAILURE, err))
   }
 }
 

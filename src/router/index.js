@@ -14,6 +14,7 @@ import buildDetails from '../views/BuildDetails.vue'
 import addPart from '../views/AddPart.vue'
 import forum from '../views/Forum.vue'
 import addPost from '../views/AddPost.vue'
+import postDetail from '../views/PostDetail.vue'
 import logout from '../views/Logout.vue'
 
 Vue.use(VueRouter)
@@ -102,6 +103,13 @@ export const router = new VueRouter({
     path: '/forum/add',
     name: 'addPost',
     component: addPost,
+    meta: {
+      auth: true
+    }
+  }, {
+    path: '/forum/:id',
+    name: 'postDetail',
+    component: postDetail,
     meta: {
       auth: true
     }

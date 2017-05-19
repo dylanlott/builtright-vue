@@ -1,12 +1,15 @@
 <template>
   <div>
-    <v-progress-linear v-if="builds.loading"
+
+    <h1>Your Builds</h1>
+    <v-progress-linear v-if="loading"
       v-bind:indeterminate="true">
     </v-progress-linear>
 
+    <code>{{ builds }}</code>
     <v-card
       class="build__cards grey darken-3 white--text"
-      v-for="build in builds.builds">
+      v-for="build in builds">
         <v-card-row>
           <v-card-title>
             {{build.name}}
@@ -45,11 +48,13 @@ export default {
   name: 'buildsList',
   computed: mapState({
     user: state => state.user,
-    builds: state => state.builds
+    builds: state => state.builds.builds.data,
+    success: state => state.builds.success,
+    loading: state => state.builds.loading
   }),
   created () {
-    this.$store.dispatch('getBuildsForUser', this.user.user_id)
-    this.$store.dispatch('getUserInfo')
+    console.log('this.user', this.user.user_id)
+    this.$store.dispatch('getBuildsByUser', this.user.user_id, 0, 50)
   }
 }
 </script>

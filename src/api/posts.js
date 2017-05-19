@@ -7,17 +7,16 @@ const token = storage.getItem('token')
 const URL = config.API_URL
 
 export default {
-  getPosts () {
+  getPosts (options) {
     return new Promise((resolve, reject) => {
       axios.get(`${URL}/posts`, {
         params: {
-          token: token
+          token: token,
+          options
         }
       })
-      .then((res) => {
-        console.log('posts: ', res)
-        return resolve(res)
-      })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err))
     })
   },
 
@@ -33,14 +32,14 @@ export default {
     })
   },
 
-  getDetails () {
+  getDetails (id) {
     return new Promise((resolve, reject) => {
-      axios.get(`${URL}/${id}`, {
+      axios.get(`${URL}/posts/${id}`, {
         params: {
           token: token
         }
       })
-      .then((res) => resolve(res))
+      .then((res) => resolve(res.data))
       .catch((err) => reject(err))
     })
   }

@@ -8,7 +8,7 @@ const token = storage.getItem('token')
 
 const state = {
   posts: [],
-  details: {},
+  postDetails: {},
   success: false,
   loading: false,
   errors: ''
@@ -42,6 +42,23 @@ const mutations = {
     state.loading = false
     state.success = false
     state.errors = errors
+  },
+  [types.GET_POST_DETAILS_REQUEST] (state) {
+    state.loading = true
+    state.success = false
+    state.postDetails = {}
+    state.errors = ''
+  },
+  [types.GET_POST_DETAILS_SUCCESS] (state, postDetails) {
+    state.loading = false
+    state.success = true
+    state.postDetails = postDetails
+    state.errors = ''
+  },
+  [types.GET_POS1T_DETAILS_FAILURE] (state, errors) {
+    state.loading = false
+    state.success = false
+    state.errors = errors
   }
 }
 
@@ -61,13 +78,25 @@ const actions = {
       })
   },
 
+  getPostDetails ({commit, state}, id) {
+    commit(types.GET_POST_DETAILS_REQUEST)
+    return posts.getDetails(id)
+      .then((post) => {
+        console.log('post: ', post)
+        commit(types.GET_POST_DETAILS_SUCCESS, post)
+        return post
+      })
+      .catch((err) => {
+        commit(types.GET_POST_DETAILS_FAILURE, err)
+        return err
+      })
+  },
+
   createPost ({commit, state}, post) {
     commit(types.CREATE_POST_REQUEST)
     return posts.createPost(post)
       .then((res) => {
-        console.log('create post: ', res)
         commit(types.CREATE_POST_SUCCESS)
-        // fire off toast
         router.push({ name: 'forum' })
         return res
       })

@@ -8,26 +8,30 @@
         <v-icon>create</v-icon>
       </v-btn>
     </router-link>
+
     <div class="posts">
       <div v-if="!posts.data">
         <p style="color: #fff">There are no posts to show here.</p>
       </div>
-      <div class="post-list">
-        <v-list two-line>
-          <template v-for="item in posts.data">
-            <v-list-item>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title v-html="item.title" />
-                  <v-list-tile-sub-title v-html="item.subtitle" />
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list-item>
-          </template>
-        </v-list>
+      <div v-for="item in posts">
+        <router-link :to="{ name: 'postDetail', params: { id: item._id }}">
+          <div class="post-list">
+            <v-list two-line>
+              <template>
+                <v-list-item>
+                  <v-list-tile>
+                    <v-list-tile-content>
+                      <v-list-tile-title v-html="item.title" />
+                      <v-list-tile-sub-title v-html="item.text" />
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list-item>
+              </template>
+            </v-list>
+          </div>
+        </router-link>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -37,7 +41,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'forum',
   computed: mapState({
-    posts: state => state.posts
+    posts: state => state.posts.posts
   }),
   created () {
     this.$store.dispatch('getPosts')
