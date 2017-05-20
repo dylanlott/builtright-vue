@@ -8,7 +8,7 @@ const token = storage.getItem('token')
 
 const state = {
   posts: [],
-  postDetails: {},
+  postDetails: undefined,
   success: false,
   loading: false,
   errors: ''
@@ -49,13 +49,13 @@ const mutations = {
     state.postDetails = {}
     state.errors = ''
   },
-  [types.GET_POST_DETAILS_SUCCESS] (state, postDetails) {
+  [types.GET_POST_DETAILS_SUCCESS] (state, data) {
     state.loading = false
     state.success = true
-    state.postDetails = postDetails
-    state.errors = ''
+    state.postDetails = data
+    state.errors = undefined 
   },
-  [types.GET_POS1T_DETAILS_FAILURE] (state, errors) {
+  [types.GET_POST_DETAILS_FAILURE] (state, errors) {
     state.loading = false
     state.success = false
     state.errors = errors
@@ -82,13 +82,10 @@ const actions = {
     commit(types.GET_POST_DETAILS_REQUEST)
     return posts.getDetails(id)
       .then((post) => {
-        console.log('post: ', post)
         commit(types.GET_POST_DETAILS_SUCCESS, post)
-        return post
       })
       .catch((err) => {
         commit(types.GET_POST_DETAILS_FAILURE, err)
-        return err
       })
   },
 
@@ -105,6 +102,15 @@ const actions = {
         commit(types.CREATE_POST_FAILURE)
         return err
       })
+  },
+
+  updatePost ({commit, state}, update) {
+    return null
+  },
+
+  deletePost ({commit, state}, id) {
+    commit(types.DELETE_POST_REQUEST)
+    return posts.deletePost(id)
   }
 }
 
