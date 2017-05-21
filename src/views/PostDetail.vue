@@ -45,6 +45,40 @@
     <v-card-row actions>
       <v-btn flat @click.native="" class="blue--text darken-1">Add Comment</v-btn>
     </v-card-row>
+    <v-expansion-panel expand>
+      <v-expansion-panel-content expand>
+        <div slot="header">Comments</div>
+        <v-card>
+          <v-card-text>No comments on this post. </v-card-text>
+        </v-card>
+        <v-card v-for="comment in details.comments">
+          <v-card-text class="grey lighten-3">
+            {{ comment }}
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+    <v-expansion-panel>
+      <v-expansion-panel-content>
+        <div slot="header">Comment on this post</div>
+        <v-card style="margin-top: 0px;">
+          <v-card-text class="grey lighten-3">
+            <v-row row padded>
+               <v-text-field
+                 name="comment"
+                 label="Add a comment"
+                 v-model="comment.body"
+                 multi-line
+               ></v-text-field>
+             </v-row>
+             <v-row>
+               <v-btn primary dark @click.native="submitComment()">Submit</v-btn>
+             </v-row>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+
   </v-card>
   </div>
 </template>
@@ -54,7 +88,11 @@ import { mapState } from 'vuex'
 
 export default {
   data () {
-    return {}
+    return {
+      comment: {
+        body: ''
+      }
+    }
   },
   computed: mapState({
     user: state => state.user,

@@ -12,7 +12,7 @@ const storage = window.localStorage
 
 axios.interceptors.response.use(undefined, function (err) {
   if (err.message === 'Request failed with status code 401') {
-    storage.clear()
+    // storage.clear()
     router.push({ name: 'login' })
   }
 })

@@ -30,12 +30,11 @@ export default {
 
   signup (user, context) {
     return new Promise((resolve, reject) => {
-      console.log('user', user);
+      console.log('pre axios user', user);
       axios.post(`${API_URL}/users`, user)
         .then((user) => {
-          storage.set('token', user.token)
-          router.push({ name: 'dashboard' })
-          resolve(user.data.data[0])
+          console.log('SIGN UP USER: ', user)
+          resolve(user)
         })
         .catch((err) => reject(err))
     })

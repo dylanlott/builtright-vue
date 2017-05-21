@@ -1,45 +1,46 @@
 import * as types from '../mutation-types'
 import api from '../../api/user'
 import { router } from '../../router/index'
-const localStorage = window.localStorage
 
+const storage = window.localStorage
 const state = {
-  token: localStorage.getItem('token') || '',
-  user_id: localStorage.getItem('user_id') || '',
+  token: storage.getItem('token') || '',
+  user_id: storage.getItem('user_id') || '',
   user: {},
-  admin: false
+  admin: false,
+  access: 1000,
+  mongo_id: undefined,
+  loading: false,
+  success: true
 }
 
 const mutations = {
-  [types.SET_ADMIN] (state, admin) {
-    console.log('admin', admin);
-    localStorage.setItem('admin', admin)
-    state.admin = admin
+  [types.LOGIN_USER_REQUEST] (state) {
+    state.loading = true
+    state.success = false
   },
-  [types.SET_ACCESS_LEVEL] (state, level) {
-    console.log('level', level);
-    state.access = level
-    localStorage.setItem('access', level)
+  [types.LOGIN_USER_SUCCESS] (state, user) {
+    console.log('LOGIN_USER: ', user)
+    storage.setItem('user_id', user.data.email)
+    storage.setItem('access', user.data.access)
+    storage.setItem('token', user.token)
+    storage.setItem('_id', user.data._id)
+    state.user.email = user.data.email
+    state.token = user.token
+    state.user.id = user.data.user_id
+    state.access = user.data.access
   },
-  [types.SET_MONGO_ID] (state, id) {
-    state._id = id
-    localStorage.setItem('_id', id)
-  },
-  [types.SET_TOKEN] (state, token) {
-    console.log('TOKEN', token);
-    localStorage.setItem('token', token)
-  },
-  [types.SET_USER_ID] (state, id) {
-    localStorage.setItem('user_id', id)
-  },
-  [types.LOGIN_USER] (state, user) {
-    state.user.email = user.email
-    state.token = user.access_token
-    state.user.id = user.user_id
-  },
-  [types.LOGOUT_USER] (state) {
+  [types.LOGOUT_USER_REQUEST] (state) {
     state.token = null
     state.user = {}
+    state.loading = true
+    state.success = false
+  },
+  [types.LOGOUT_USER_SUCCESS] (state) {
+    state.token = null
+    state.user = {}
+    state.loading = false
+    state.success = true
   },
   [types.SIGNUP_USER_REQUEST] (state, user) {
     state.loading = true
@@ -68,28 +69,26 @@ const mutations = {
 
 const actions = {
   loginUser ({commit, state}, user) {
+    commit(types.LOGIN_USER_REQUEST)
     return api.login(user)
       .then((user) => {
-        commit(types.LOGIN_USER, user)
-        commit(types.SET_USER_ID, user.data.email)
-        commit(types.SET_TOKEN, user.token)
-        commit(types.SET_ACCESS_LEVEL, user.data.access)
-        commit(types.SET_MONGO_ID, user.data._id)
+        commit(types.LOGIN_USER_SUCCESS, user)
         router.push('/dashboard')
       })
       .catch((err) => {
+        commit(types.LOGIN_USER_FAILURE, err)
         console.log('err logging in user:', err);
-        throw new Error(err)
       })
   },
   getAuthToken ({commit, state}) {
-    return localStorage.getItem('token')
+    return storage.getItem('token')
   },
   logoutUser ({commit, state}) {
-    localStorage.clear()
-    commit(types.LOGOUT_USER)
+    commit(types.LOGOUT_USER_REQUEST)
+    storage.clear()
     router.push({ name: 'landing' })
     location.reload()
+    commit(types.LOGOUT_USER_SUCCESS)
   },
   getUserInfo ({commit, state}) {
     commit(types.RECEIVE_USER_INFO)
@@ -105,12 +104,29 @@ const actions = {
   },
   signup ({commit, state}, user) {
     commit(types.SIGNUP_USER_REQUEST)
+    const self = this;
+    const login = {
+      email: user.email,
+      password: user.password
+    };
     return api.signup(user)
       .then((user) => {
         commit(types.SIGNUP_USER_SUCCESS, user)
+        const login = {
+          email: user.email,
+          password: user.password
+        }
         return user
       })
+      .then((user) => {
+        api.login(login)
+          .then((res) => {
+            commit(types.LOGIN_USER_SUCCESS, res)
+            router.push({ name: 'dashboard' })
+          })
+      })
       .catch((err) => {
+        console.log('Signup User Error: ', err)
         commit(types.SIGNUP_USER_FAILURE, err)
       })
   }

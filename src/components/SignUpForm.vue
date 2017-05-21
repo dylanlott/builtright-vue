@@ -3,6 +3,14 @@
     <div class="form__signup well">
       <div class="inputs">
         <v-text-field
+          id="DisplayName"
+          name="displayname"
+          type="text"
+          label="Display Name"
+          v-model="user.displayName"
+          required
+        ></v-text-field>
+        <v-text-field
           id="Email"
           name="Email"
           label="Email"
@@ -17,6 +25,14 @@
           v-model="user.password"
           required
         ></v-text-field>
+        <v-text-field
+          id="ConfirmPassword"
+          name="confirmpassword"
+          type="password"
+          label="Confirm Password"
+          v-model="user.confirmPassword"
+          required
+        ></v-text-field>
       </div>
       <v-btn primary class="button__signup" @click.native="submit()">
         Sign Up
@@ -29,26 +45,41 @@
 </template>
 
 <script>
+import { router } from '../router'
+
 export default {
   data () {
     return {
       user: {
         username: '',
         password: ''
-      },
-      isValid: false
+      }
     }
   },
   methods: {
     submit () {
       var user = {
         email: this.user.email,
+        password: this.user.password,
+        displayName: this.user.displayName
+      }
+
+      var loginUser = {
+        email: this.user.email,
         password: this.user.password
       }
 
-      this.$store.dispatch('signup', user)
-      this.user.username = ''
-      this.user.password = ''
+      if (this.user.password === this.user.confirmPassword) {
+        this.$store.dispatch('signup', user)
+      }
+
+      if (this.user.password !== this.user.confirmPassword)  {
+        this.$swal({
+          type: 'warning',
+          title: 'Passwords must match.',
+          text: 'Please re-enter your password'
+        })
+      }
     }
   }
 }

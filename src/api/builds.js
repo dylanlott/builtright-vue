@@ -18,10 +18,8 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/builds`, {
         params: {
-          token: token,
-          owner: user,
-          limit: limit,
-          skip: skip
+          token,
+          user
         }
       })
       .then((res) => resolve(res))
@@ -41,10 +39,9 @@ export default {
       const params = {
         token: token
       }
-
       axios.get(`${API_URL}/builds/${id}`, params)
-      .then((res) => resolve(res.data))
-      .catch((err) => reject(err))
+        .then((res) => resolve(res.data))
+        .catch((err) => reject(err))
     })
   },
 

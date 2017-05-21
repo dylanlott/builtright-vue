@@ -93,8 +93,8 @@ const actions = {
     commit(types.GET_BUILDS_REQUEST)
     return builds.getBuildsByUser(user, skip, limit)
       .then((res) => {
-        const builds = res.data
-        commit(types.GET_BUILDS_SUCCESS, builds)
+        console.log('builds: ', res)
+        commit(types.GET_BUILDS_SUCCESS, res.data)
       })
       .catch((err) => {
         commit(types.GET_BUILDS_FAILURE, err)
@@ -113,6 +113,7 @@ const actions = {
   },
   createNewBuild ({commit, state}, build) {
     commit(types.CREATE_BUILD_REQUEST)
+    console.log('CREATE BUILD: ', build)
     return builds.createBuild(build)
       .then((build) => {
         commit(types.CREATE_BUILD_SUCCESS, build)
@@ -132,9 +133,7 @@ const actions = {
     commit(types.GET_PARTS_REQUEST)
     return parts.getPartsForBuild(id)
       .then((res) => {
-        const parts = res.data.data;
-        commit(types.GET_PARTS_SUCCESS, parts)
-        return parts
+        commit(types.GET_PARTS_SUCCESS, res.data.data)
       })
       .catch((err) => {
         commit(types.GET_PARTS_FAILURE)
@@ -144,10 +143,7 @@ const actions = {
   getAllBuilds ({commit, state}, skip) {
     commit(types.GET_BUILDS_REQUEST)
     return builds.getAllBuilds(skip)
-      .then((builds) => {
-        commit(types.GET_BUILDS_SUCCESS, builds)
-        return builds
-      })
+      .then((builds) => commit(types.GET_BUILDS_SUCCESS, builds))
       .catch((err) => commit(types.GET_BUILDS_FAILURE, err))
   }
 }

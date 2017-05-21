@@ -55,7 +55,7 @@ export default {
     posts: state => state.posts
   }),
   created: function() {
-    this.$store.dispatch('getBuildsByUser', this.user.user_id)
+    setTimeout(this.$store.dispatch('getBuildsByUser', this.user.user_id), 2000)
   },
   data () {
     return {

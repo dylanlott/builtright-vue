@@ -4,7 +4,9 @@
     <v-toolbar>
       <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
       <v-toolbar-logo class="logo hidden-lg-and-up">
-        <img src="./img/logo-horizontal.png" alt="" height="50" class="app-logo">
+        <router-link :to="{ name: 'dashboard' }">
+          <img src="./img/logo-horizontal.png" alt="" height="50" class="app-logo">
+        </router-link>
       </v-toolbar-logo>
       <div class="white--text">
         {{ user.user_id }}

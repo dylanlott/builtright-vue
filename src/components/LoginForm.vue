@@ -46,7 +46,6 @@ export default {
         password: this.user.password
       }
       this.$store.dispatch('loginUser', user)
-      this.$swal('Logged In')
       this.user.email = ''
       this.user.password = ''
     }

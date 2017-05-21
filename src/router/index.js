@@ -16,6 +16,7 @@ import forum from '../views/Forum.vue'
 import addPost from '../views/AddPost.vue'
 import postDetail from '../views/PostDetail.vue'
 import logout from '../views/Logout.vue'
+import confirmation from '../views/EmailConfirmation.vue'
 
 Vue.use(VueRouter)
 
@@ -117,6 +118,13 @@ export const router = new VueRouter({
     path: '/logout',
     name: 'logout',
     component: logout,
+    meta: {
+      auth: false
+    }
+  }, {
+    path: '/confirm',
+    name: 'confirmation',
+    component: confirmation,
     meta: {
       auth: false
     }
