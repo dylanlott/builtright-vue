@@ -10,12 +10,11 @@ import VueSweetAlert from 'vue-sweetalert'
 
 const storage = window.localStorage
 
-axios.interceptors.response.use(undefined, function (err) {
-  if (err.message === 'Request failed with status code 401') {
-    // storage.clear()
-    router.push({ name: 'login' })
-  }
-})
+// axios.interceptors.response.use(undefined, function (err) {
+//   if (err.message === 'Request failed with status code 401') {
+//     router.push({ name: 'login' })
+//   }
+// })
 
 Vue.use(Vuetify)
 Vue.use(BootstrapVue)

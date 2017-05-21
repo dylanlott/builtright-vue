@@ -17,10 +17,8 @@
 <script>
 import BuildsList from '../components/BuildsList.vue'
 export default {
-  data () {
-    return {}
-  },
   created () {
+    this.$store.dispatch('getBuildsByUser', this.user_id, 0, this.limit)
   },
   components: { BuildsList }
 }

@@ -152,21 +152,20 @@ export default {
   },
   methods: {
     goToDashboard() {
-      if (state.user) {
+      if (state.token) {
         router.push('dashboard')
       }
     },
     logout () {
-      this.$swal('You\'ve been logged out!')
       this.$store.dispatch('logoutUser')
+      this.$swal('You\'ve been logged out!')
     }
   },
-  // watch: {
-  //   '$route': () => {
-  //     console.log('route', this)
-  //     update()
-  //   }
-  // }
+  watch: {
+    '$route': () => {
+      console.log('route', this)
+    }
+  }
 }
 
 // function update () {

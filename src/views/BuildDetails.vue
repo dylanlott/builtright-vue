@@ -4,11 +4,6 @@
       Dashboard / Builds / Details
     </div>
 
-
-    <!-- <pre>
-      {{details}}
-    </pre> -->
-
     <v-card class="details__card">
        <v-card-text>
          <h1>{{details.name}}</h1>

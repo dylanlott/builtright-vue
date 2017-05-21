@@ -73,7 +73,11 @@ const actions = {
     return api.login(user)
       .then((user) => {
         commit(types.LOGIN_USER_SUCCESS, user)
-        router.push('/dashboard')
+        return user
+      })
+      .then((user) => {
+        router.push({ name: 'dashboard' })
+        
       })
       .catch((err) => {
         commit(types.LOGIN_USER_FAILURE, err)

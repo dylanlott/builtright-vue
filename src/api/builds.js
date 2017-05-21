@@ -53,7 +53,7 @@ export default {
           token: build.token
         }
       })
-      .then((res) => resolve(res))
+      .then((res) => resolve(res.data))
       .catch((err) => reject(err))
     })
   },
@@ -68,6 +68,18 @@ export default {
       axios.get('/builds', params)
         .then((builds) => resolve(builds.data))
         .catch((err) => err)
+    })
+  },
+
+  deleteBuild (id) {
+    return new Promise((resolve, reject) => {
+      const params = {
+        token,
+        id
+      }
+      axios.delete(`${API_URL}/builds/${id}`)
+        .then((res) => resolve(res))
+        .catch((err) => reject(err))
     })
   }
 }
