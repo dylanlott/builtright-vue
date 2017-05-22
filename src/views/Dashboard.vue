@@ -16,17 +16,7 @@ export default {
   computed: mapState({
     user: state => state.user
   }),
-  mounted () {
-    console.log('mounted')
-    console.log('this.user_id: ', this.user_id)
-    this.$store.dispatch('getBuildsByUser', this.user_id)
-  },
-  data () {
-    return {
-      items: [{ href: '/dashboard', text: 'Home' }]
-    }
-  },
-  components: { CreateBuildForm }
+  components: { }
 }
 
 </script>

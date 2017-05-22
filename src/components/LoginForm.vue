@@ -7,6 +7,8 @@
           name="Email"
           label="Email"
           v-model="user.email"
+
+          prepend-icon="account_circle"
           required
         ></v-text-field>
         <v-text-field
@@ -15,6 +17,8 @@
           type="password"
           label="Password"
           v-model="user.password"
+          min="8"
+          prepend-icon="lock"
           required
         ></v-text-field>
         <div>
