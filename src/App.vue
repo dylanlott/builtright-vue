@@ -18,7 +18,7 @@
               <v-icon>account_circle</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title v-show="user.token">{{ user.user.email }}</v-list-tile-title>
+              <v-list-tile-title v-show="user.token">{{ user.email }}</v-list-tile-title>
               <v-list-tile-title v-show="!user.token">
                 <router-link class="menu-link" to="login">Login</router-link>
               </v-list-tile-title>
@@ -125,6 +125,7 @@
     </v-toolbar>
     <main>
       <router-view></router-view>
+      <BottomNav></BottomNav>
     </main>
   </v-app>
 </template>
@@ -132,7 +133,7 @@
 <script>
 import {mapState} from 'vuex'
 import {router} from './router/index'
-
+import BottomNav from './components/BottomNav.vue'
 export default {
   name: 'builtright',
   computed: mapState({
@@ -145,6 +146,9 @@ export default {
       drawer: null,
       show: false
     }
+  },
+  components: {
+    BottomNav
   },
   methods: {
     goToDashboard () {

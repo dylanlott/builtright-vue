@@ -3,14 +3,16 @@
     <div class="secondary__nav">
       Dashboard / Builds
     </div>
-    <v-content>
 
-      <router-link class="routerlink" to="/builds/create">
-        <v-btn router class="primary"><v-icon>add</v-icon> Add A Build</v-btn>
-      </router-link>
-      <BuildsList></BuildsList>
-    </v-content>
+    <router-link class="routerlink hidden-xs-only" to="/builds/create">
+      <v-btn floating class="primary floating"><v-icon>add</v-icon></v-btn>
+    </router-link>
 
+    <v-layout row wrap>
+      <v-flex xs12>
+        <BuildsList></BuildsList>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -25,6 +27,11 @@ export default {
 </script>
 
 <style media="screen" lang="stylus">
+  .floating
+    position: absolute
+    top: 120px
+    right: 20px
+
   .secondary__nav
     margin-bottom: 20px
 

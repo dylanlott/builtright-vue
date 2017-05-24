@@ -25,9 +25,9 @@ const mutations = {
     storage.setItem('access', user.data.access)
     storage.setItem('token', user.token)
     storage.setItem('_id', user.data._id)
-    state.user.email = user.data.email
+    state.email = user.data.email
     state.token = user.token
-    state.user.id = user.data.user_id
+    state.user_id = user.data.user_id
     state.access = user.data.access
   },
   [types.LOGOUT_USER_REQUEST] (state) {
