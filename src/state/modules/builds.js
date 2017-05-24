@@ -104,7 +104,7 @@ const actions = {
   getBuildDetails ({commit, state}, id) {
     commit(types.GET_BUILD_DETAILS_REQUEST)
     return builds.getBuildDetails(id)
-      .then((res) => commit(types.GET_BUILD_DETAILS_SUCCESS, res.data[0]))
+      .then((res) => commit(types.GET_BUILD_DETAILS_SUCCESS, res))
       .catch((err) => commit(types.GET_BUILD_DETAILS_FAILURE, err))
   },
   createNewBuild ({commit, state}, build) {
@@ -132,7 +132,7 @@ const actions = {
       .then((builds) => commit(types.GET_BUILDS_SUCCESS, builds))
       .catch((err) => commit(types.GET_BUILDS_FAILURE, err))
   },
-  deleteBuils ({commit, state}, id) {
+  deleteBuild ({commit, state}, id) {
     commit(types.DELETE_BUILD_REQUEST)
     return builds.deleteBuild(id)
       .then((build) => commit(types.DELETE_BUILD_SUCCESS, build))

@@ -36,14 +36,16 @@ export default {
    */
   getBuildDetails (id, context) {
     return new Promise((resolve, reject) => {
-      const params = {
-        token: token
-      }
-      axios.get(`${API_URL}/builds/${id}`, params)
-        .then((res) => resolve(res.data))
-        .catch((err) => reject(err))
+      axios.get(`${API_URL}/builds/${id}`, {
+        params: {
+          token
+        }
+      })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err))
     })
   },
+
 
   createBuild (build, context) {
     return new Promise((resolve, reject) => {

@@ -90,6 +90,7 @@ const actions = {
   logoutUser ({commit, state}) {
     commit(types.LOGOUT_USER_REQUEST)
     storage.clear()
+    location.reload()
     router.push({ name: 'landing' })
     commit(types.LOGOUT_USER_SUCCESS)
   },
@@ -101,8 +102,7 @@ const actions = {
         return user;
       })
       .catch((err) => {
-        commit(types.RECEIVE_USER_FAILURE)
-        console.log(err)
+        commit(types.RECEIVE_USER_FAILURE, err)
       })
   },
   signup ({commit, state}, user) {
@@ -129,7 +129,6 @@ const actions = {
           })
       })
       .catch((err) => {
-        console.log('Signup User Error: ', err)
         commit(types.SIGNUP_USER_FAILURE, err)
       })
   }
