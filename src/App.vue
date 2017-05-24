@@ -1,5 +1,15 @@
 <template>
   <v-app id="builtright-app">
+    <div v-for="alert in alerts">
+      <v-snackbar :timeout="alert.timeout"
+        :success="alert.type === 'success'"
+        :info="alert.type === 'info'"
+        :warning="alert.type === 'warning'"
+        :error="alert.type === 'error'">
+        {{ alert.message }}
+      </v-snackbar>
+    </div>
+
     <v-navigation-drawer temporary v-model="drawer" light>
       <v-list class="pa-0">
         <v-list-item>
@@ -8,8 +18,8 @@
               <v-icon>account_circle</v-icon>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title v-if="user.token">{{ user.user_id }}</v-list-tile-title>
-              <v-list-tile-title v-if="!user.token">
+              <v-list-tile-title v-show="user.token">{{ user.user.email }}</v-list-tile-title>
+              <v-list-tile-title v-show="!user.token">
                 <router-link class="menu-link" to="login">Login</router-link>
               </v-list-tile-title>
             </v-list-tile-content>
@@ -22,9 +32,30 @@
         </v-list-item>
       </v-list>
       <v-list class="pt-0" dense>
-        <v-divider></v-divider>
 
-        <router-link :to="{ name: 'builds' }" class="menu-link">
+        <v-divider
+         dark
+         class="my-4"
+       ></v-divider>
+
+       <router-link v-if="user.token"
+          :to="{ name: 'dashboard' }"
+          class="menu-link">
+         <v-list-item >
+           <v-list-tile>
+             <v-list-tile-action>
+               <v-icon>dashboard</v-icon>
+             </v-list-tile-action>
+             <v-list-tile-content>
+               <v-list-tile-title>Dashboard</v-list-tile-title>
+             </v-list-tile-content>
+           </v-list-tile>
+         </v-list-item>
+       </router-link>
+
+        <router-link v-if="user.token"
+            :to="{ name: 'builds' }"
+            class="menu-link">
           <v-list-item >
             <v-list-tile>
               <v-list-tile-action>
@@ -51,7 +82,9 @@
         </router-link>
 
 
-        <router-link class="menu-link" :to="{ name: 'profile'}">
+        <router-link v-if="user.token"
+            class="menu-link"
+            :to="{ name: 'profile'}">
           <v-list-item >
             <v-list-tile>
               <v-list-tile-action>
@@ -63,6 +96,22 @@
             </v-list-tile>
           </v-list-item>
         </router-link>
+
+        <v-divider
+         dark
+         class="my-4"
+       ></v-divider>
+
+        <v-list-item v-if="user.token" @click="logout()">
+          <v-list-tile>
+            <v-list-tile-action>
+              <v-icon>clear</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Logout</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-item>
 
       </v-list>
     </v-navigation-drawer>
@@ -88,59 +137,24 @@ export default {
   name: 'builtright',
   computed: mapState({
     user: state => state.user,
-    admin: state => state.admin
+    admin: state => state.admin,
+    alerts: state => state.user.alerts
   }),
   data() {
     return {
       drawer: null,
-      mini: false,
-      right: null,
-      show: false,
-      loggedIn: false,
-      sidebar: false,
-      authed: [{
-          title: 'Dashboard',
-          avatar: 'dashboard',
-          link: 'dashboard'
-        },
-        {
-          title: 'Forums',
-          avatar: 'list',
-          link: 'forum'
-        },
-        {
-          title: 'Builds',
-          avatar: 'build',
-          link: 'builds'
-        },
-        {
-          title: 'User Profile',
-          avatar: 'account_box',
-          link: 'profile'
-        }
-      ],
-      unauthed: [{
-          title: 'Login',
-          avatar: 'account_box',
-          link: 'login'
-        },
-        {
-          title: 'Sign Up',
-          avatar: 'create',
-          link: 'signup'
-        }
-      ]
+      show: false
     }
   },
   methods: {
-    goToDashboard() {
-      if (state.token) {
+    goToDashboard () {
+      if (user.token) {
         router.push('dashboard')
       }
     },
     logout () {
+      this.loggedOut = true
       this.$store.dispatch('logoutUser')
-      this.$swal('You\'ve been logged out!')
     }
   },
   watch: {

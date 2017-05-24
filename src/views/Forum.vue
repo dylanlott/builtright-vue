@@ -41,6 +41,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'forum',
   computed: mapState({
+    user: state => state.user,
     posts: state => state.posts.posts
   }),
   created () {

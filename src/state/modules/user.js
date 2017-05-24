@@ -11,7 +11,8 @@ const state = {
   access: 1000,
   mongo_id: undefined,
   loading: false,
-  success: true
+  success: true,
+  alerts: []
 }
 
 const mutations = {
@@ -20,7 +21,6 @@ const mutations = {
     state.success = false
   },
   [types.LOGIN_USER_SUCCESS] (state, user) {
-    console.log('LOGIN_USER: ', user)
     storage.setItem('user_id', user.data.email)
     storage.setItem('access', user.data.access)
     storage.setItem('token', user.token)
@@ -77,7 +77,11 @@ const actions = {
       })
       .then((user) => {
         router.push({ name: 'dashboard' })
+        return user
+      })
+      .then((user) => {
         commit(types.LOGIN_USER_SUCCESS, user)
+        return user
       })
       .catch((err) => {
         commit(types.LOGIN_USER_FAILURE, err)
@@ -91,6 +95,7 @@ const actions = {
     commit(types.LOGOUT_USER_REQUEST)
     storage.clear()
     location.reload()
+    this.$swal('You have been logged out.')
     router.push({ name: 'landing' })
     commit(types.LOGOUT_USER_SUCCESS)
   },
