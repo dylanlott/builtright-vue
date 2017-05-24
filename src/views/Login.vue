@@ -1,19 +1,15 @@
 <template>
   <div>
-
-    <v-container fluid="fluid">
-      <v-row class="text-xs-center">
-        <v-col xs12>
-          <h1 class="text-xs-center">Login</h1>
-          <h3>{{message}}</h3>
-          <v-col xs12 md4 offset-md4>
-            <LoginForm></LoginForm>
-          </v-col>
-        </v-col>
-      </v-row>
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex xs12 md4 offset-md4>
+            <h1 class="text-xs-center">Login</h1>
+            <h3>{{message}}</h3>
+              <LoginForm></LoginForm>
+        </v-flex>
+      </v-layout>
     </v-container>
   </div>
-
 </template>
 
 <script>

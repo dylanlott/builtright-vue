@@ -1,20 +1,11 @@
 <template>
   <div>
     <template>
-      <v-parallax src="https://drivenlocal.com/wp-content/uploads/2015/10/Material-design.jpg">
+      <v-parallax
+        src="https://drivenlocal.com/wp-content/uploads/2015/10/Material-design.jpg">
       </v-parallax>
       <h1>Explore our community now</h1>
-      <v-row>
-        <v-col md4 xs12>
 
-        </v-col>
-        <v-col md4 xs12>
-          2
-        </v-col>
-        <v-col md4 xs12>
-          3
-        </v-col>
-      </v-row>
     </template>
   </div>
 </template>

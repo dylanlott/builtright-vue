@@ -9,7 +9,8 @@
     "linter": "./node_modules/.bin/standard ./src/**/*.js",
     "pushprod": "npm run linter && fly deploy:prod",
     "pushdev": "npm run linter && fly deploy:dev",
-    "deploy": "git push deploy master"
+    "deploy": "git push deploy master",
+    "docs": "jsdoc -c ./conf.json && cd out && ws"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -35,7 +36,7 @@
     "stylus-loader": "^2.4.0",
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "^2.1.8",
-    "vuetify": "^0.11.1",
+    "vuetify": "^0.12.1",
     "webpack": "^2.2.0-rc.2",
     "webpack-dev-server": "^2.2.0-rc.0"
   }

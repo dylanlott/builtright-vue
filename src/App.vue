@@ -1,109 +1,88 @@
 <template>
-<v-app id="builtright-app" class="elevation-1" name="builtright-app" top-toolbar left-fixed-sidebar>
-  <header>
-    <v-toolbar>
-      <v-toolbar-side-icon class="hidden-lg-and-up" @click.native.stop="sidebar = !sidebar" />
-      <v-toolbar-logo class="logo hidden-lg-and-up">
-        <router-link :to="{ name: 'dashboard' }">
-          <img src="./img/logo-horizontal.png" alt="" height="50" class="app-logo">
-        </router-link>
-      </v-toolbar-logo>
-      <div class="white--text">
-        {{ user.user_id }}
-      </div>
-    </v-toolbar>
-  </header>
-  <main>
-    <v-sidebar v-model="sidebar" fixed id="sidebar-main" name="sidebarmenu" class="sidebar-main">
-      <v-list subheader name="menuList">
-        <router-link :to="{ name: 'dashboard' }">
-          <v-subheader>
-            <img src="./img/logo-horizontal.png" alt="builtright logo" height="25">
-          </v-subheader>
-        </router-link>
-        <v-list-item v-if="user.token" name="sidebarMenuList" v-for="item in authed" v-bind:key="item.title">
-          <router-link class="menu-link" :to="{ name: item.link }">
-            <v-list-tile avatar>
-              <v-list-tile-avatar name="itemAvatar">
-                <v-icon name="itemAvatarIcon">{{ item.avatar }}</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content name="itemContent">
-                <v-list-tile-title name="itemTitle" v-html="item.title" />
-              </v-list-tile-content>
-            </v-list-tile>
-          </router-link>
-        </v-list-item>
-
-        <v-list-item v-if="user.token" @click="logout()">
-          <v-list-tile avatar>
-            <v-list-tile-avatar name="itemAvatar">
-              <v-icon name="itemAvatarIcon">clear</v-icon>
+  <v-app id="builtright-app">
+    <v-navigation-drawer temporary v-model="drawer" light>
+      <v-list class="pa-0">
+        <v-list-item>
+          <v-list-tile avatar tag="div">
+            <v-list-tile-avatar>
+              <v-icon>account_circle</v-icon>
             </v-list-tile-avatar>
-            <v-list-tile-content name="itemContent">
-              <v-list-tile-title name="itemTitle">Logout</v-list-tile-title>
+            <v-list-tile-content>
+              <v-list-tile-title v-if="user.token">{{ user.user_id }}</v-list-tile-title>
+              <v-list-tile-title v-if="!user.token">
+                <router-link class="menu-link" to="login">Login</router-link>
+              </v-list-tile-title>
             </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn icon dark @click.native.stop="drawer = !drawer">
+                <v-icon>chevron_left</v-icon>
+              </v-btn>
+            </v-list-tile-action>
           </v-list-tile>
         </v-list-item>
+      </v-list>
+      <v-list class="pt-0" dense>
+        <v-divider></v-divider>
 
-        <v-list-item v-if="!user.token">
-          <router-link class="menu-link" :to="{ name: 'forum' }">
-            <v-list-tile avatar>
-              <v-list-tile-avatar name="itemAvatar">
-                <v-icon name="itemAvatarIcon">list</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content name="itemContent">
-                <v-list-tile-title name="itemTitle">Forums</v-list-tile-title>
+        <router-link :to="{ name: 'builds' }" class="menu-link">
+          <v-list-item >
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon>build</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Builds</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-          </router-link>
-        </v-list-item>
+          </v-list-item>
+        </router-link>
 
-        <v-divider class="white"></v-divider>
-        <v-list-item v-if="!user.token">
-
-          <router-link class="menu-link" :to="{ name: 'login' }">
-            <v-list-tile avatar>
-              <v-list-tile-avatar name="itemAvatar">
-                <v-icon name="itemAvatarIcon">account_circle</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content name="itemContent">
-                <v-list-tile-title name="itemTitle">Login</v-list-tile-title>
+        <router-link class="menu-link" :to="{ name: 'forum' }">
+          <v-list-item >
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon>list</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Forum</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-          </router-link>
-        </v-list-item>
+          </v-list-item>
+        </router-link>
 
-        <v-list-item v-if="!user.token">
-          <router-link class="menu-link" :to="{ name: 'signup' }">
-            <v-list-tile avatar>
-              <v-list-tile-avatar name="itemAvatar">
-                <v-icon name="itemAvatarIcon">create</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content name="itemContent">
-                <v-list-tile-title name="itemTitle">Sign Up</v-list-tile-title>
+
+        <router-link class="menu-link" :to="{ name: 'profile'}">
+          <v-list-item >
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon>account_circle</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Profile</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-          </router-link>
-        </v-list-item>
+          </v-list-item>
+        </router-link>
 
       </v-list>
-    </v-sidebar>
-    <v-content>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
-  </main>
-</v-app>
+    </v-navigation-drawer>
+    <v-toolbar fixed class="deep-orange">
+      <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>
+        <router-link :to="{ name: 'dashboard' }">
+          <img src="./img/logo-horizontal.png" alt="" height="35" class="app-logo">
+        </router-link>
+      </v-toolbar-title>
+    </v-toolbar>
+    <main>
+      <router-view></router-view>
+    </main>
+  </v-app>
 </template>
 
 <script>
-import {
-  mapState
-} from 'vuex'
-import {
-  router
-} from './router/index'
+import {mapState} from 'vuex'
+import {router} from './router/index'
 
 export default {
   name: 'builtright',
@@ -113,6 +92,9 @@ export default {
   }),
   data() {
     return {
+      drawer: null,
+      mini: false,
+      right: null,
       show: false,
       loggedIn: false,
       sidebar: false,
@@ -192,7 +174,7 @@ export default {
   .menu-link
     text-decoration: none
 
-  #logo
-    margin-left: 28px
+  #app-logo
+    margin-top: 5px
 
 </style>
