@@ -51,8 +51,6 @@ export default {
         password: this.user.password
       }
       this.$store.dispatch('loginUser', user)
-      this.user.email = ''
-      this.user.password = ''
     }
   }
 }

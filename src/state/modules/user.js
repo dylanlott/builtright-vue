@@ -77,7 +77,7 @@ const actions = {
       })
       .then((user) => {
         router.push({ name: 'dashboard' })
-        
+        commit(types.LOGIN_USER_SUCCESS, user)
       })
       .catch((err) => {
         commit(types.LOGIN_USER_FAILURE, err)
@@ -91,7 +91,6 @@ const actions = {
     commit(types.LOGOUT_USER_REQUEST)
     storage.clear()
     router.push({ name: 'landing' })
-    location.reload()
     commit(types.LOGOUT_USER_SUCCESS)
   },
   getUserInfo ({commit, state}) {

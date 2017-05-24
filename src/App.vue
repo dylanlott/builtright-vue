@@ -163,17 +163,11 @@ export default {
   },
   watch: {
     '$route': () => {
-      console.log('route', this)
+      this.$store.dispatch('getUserInfo')
     }
   }
 }
 
-// function update () {
-//   if (user.token) {
-//     return this,loggedIn = true
-//   }
-//   return this.loggedIn = false
-// }
 </script>
 
 <style lang="stylus">

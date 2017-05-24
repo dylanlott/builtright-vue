@@ -16,16 +16,27 @@ export default {
    * @param  {type} context context
    * @return {type}         returns resolve if successful, reject if failure
    */
-  addPartToBuild (part, build, context) {
+  addPartToBuild (part, build, id, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        token: token
+        token
       }
-      part.owner = user.getUserId()
-      part.build = build
-      axios.post(`${API_URL}/parts`, part, params)
-        .then((res) => resolve(res))
-        .catch((err) => reject(err))
+      console.log('Part to add: ', part)
+      console.log('BUILD PRE: ', build)
+      build.parts.push(part)
+      console.log('BUILD POST: ', build)
+      // part.user = user.getUserId()
+      // axios.post(`${API_URL}/parts`, part, params)
+      //   .then((res) => {
+      //     console.log('part to add: ', part)
+      //     build.parts.push(part)
+      //     console.log('build object: ', build)
+      //     builds.updateBuild(build, id)
+      //       .then((res) => {
+      //         console.log('build updated: ', res)
+      //       })
+      //   })
+      //   .catch((err) => reject(err))
     })
   },
 
@@ -39,9 +50,9 @@ export default {
   getPartsForBuild (id, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        token: token
+        token
       }
-      axios.get(`${API_URL}/builds/${id}`, params)
+      axios.get(`${API_URL}/parts`, params)
         .then((res) => resolve(res.data.parts))
         .catch((err) => reject(err))
     })

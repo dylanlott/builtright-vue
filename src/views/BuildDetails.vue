@@ -1,39 +1,17 @@
 <template lang="html">
   <div class="content__bg">
     <div class="secondary__nav">
-      Dashboard / Builds / Details
+      Dashboard / Builds / Info
     </div>
 
     <v-card class="details__card">
        <v-card-text>
-         <h1>{{details.name}}</h1>
+
+         <code>{{ details }}</code>
+         <h1>{{details.title}}</h1>
          <h3>
           {{ details.description }}
         </h3>
-         <!-- EXPANSION PANELS -->
-         <v-expansion-panel>
-           <v-expansion-panel-content>
-             <div slot="header"><v-icon small>directions_car</v-icon> Engine</div>
-             <v-card>
-               <v-card-text class="grey lighten-3">
-                 <!-- panel content  -->
-
-               </v-card-text>
-             </v-card>
-           </v-expansion-panel-content>
-         </v-expansion-panel>
-
-         <v-expansion-panel>
-           <v-expansion-panel-content>
-             <div slot="header"><v-icon small>settings</v-icon> Parts</div>
-             <v-card>
-               <v-card-text class="grey lighten-3">
-                 <!-- panel content  -->
-
-               </v-card-text>
-             </v-card>
-           </v-expansion-panel-content>
-         </v-expansion-panel>
 
        </v-card-text>
        <v-card-row actions>
@@ -49,13 +27,23 @@
        </v-card-row>
      </v-card>
 
+     <v-btn default @click.native="addPart()">
 
+     </v-btn>
   </div>
 </template>
 
 <script>
 import { router } from '../router/index'
 import { mapState } from 'vuex'
+
+const part = {
+	"name": "turbo wastegate",
+	"description": "wastegate",
+	"price": "123.22",
+	"url": "asdf.com",
+	"user": "lott.dylan@gmail.com"
+}
 
 export default {
   name: 'buildDetails',
@@ -71,6 +59,11 @@ export default {
   created () {
     this.$store.dispatch('getBuildDetails', this.$route.params.id)
     this.$store.dispatch('getPartsForBuild', this.$route.params.id)
+  },
+  methods: {
+    addPart: function () {
+      this.$store.dispatch('addPart', this.part, this.details, this.details.id)
+    }
   }
 }
 </script>

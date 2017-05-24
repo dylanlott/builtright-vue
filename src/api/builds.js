@@ -81,5 +81,18 @@ export default {
         .then((res) => resolve(res))
         .catch((err) => reject(err))
     })
+  },
+
+  updateBuild (build, id) {
+    return new Promise((resolve, reject) => {
+      const params = {
+        token
+      }
+      axios.put(`${API_URL}/builds/${id}`, build, params)
+        .then(res => {
+
+        })
+        .catch(err => reject(err))
+    })
   }
 }
