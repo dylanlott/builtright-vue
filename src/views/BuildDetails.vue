@@ -4,7 +4,7 @@
       Dashboard / Builds / Info
     </div>
 
-    <v-btn floating class="orange">
+    <v-btn floating class="orange floating">
         <v-icon light>add</v-icon>
       </v-btn>
 
@@ -38,7 +38,6 @@ export default {
   }),
   created () {
     this.$store.dispatch('getBuildDetails', this.$route.params.id)
-    // this.$store.dispatch('getPartsForBuild', this.$route.params.id)
   },
   methods: {
     addPart: function () {
@@ -51,8 +50,13 @@ export default {
 <style lang="stylus">
 @import '../css/theme.styl'
 
-.content__bg
-  background-color: blue
+.floating
+  position: absolute
+  top: 120px
+  right: 20px
+
+// .content__bg
+  // background-color: blue
 
 .details__card
   margin: 20px 20px

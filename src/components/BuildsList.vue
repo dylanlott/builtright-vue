@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Your Builds</h1>
+
     <v-progress-linear v-if="loading"
       v-bind:indeterminate="true">
     </v-progress-linear>
@@ -28,7 +29,7 @@
           <v-spacer></v-spacer>
           Share
           <v-btn icon dark>
-            <v-icon>share</v-icon>
+            <v-icon class="white--text">share</v-icon>
           </v-btn>
         </v-card-row>
       </v-card>

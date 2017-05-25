@@ -5,7 +5,9 @@
     </div>
 
     <router-link class="routerlink hidden-xs-only" to="/builds/create">
-      <v-btn floating class="primary floating"><v-icon>add</v-icon></v-btn>
+      <v-btn floating class="success floating">
+        <v-icon class="white--text">add</v-icon>
+      </v-btn>
     </router-link>
 
     <v-layout row wrap>
@@ -13,6 +15,7 @@
         <BuildsList></BuildsList>
       </v-flex>
     </v-layout>
+
   </div>
 </template>
 
