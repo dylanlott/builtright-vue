@@ -25,9 +25,10 @@ const mutations = {
     storage.setItem('access', user.data.access)
     storage.setItem('token', user.token)
     storage.setItem('_id', user.data._id)
+    state.mongo_id = user.data._id
+    state.user_id = user.data.user_id
     state.email = user.data.email
     state.token = user.token
-    state.user_id = user.data.user_id
     state.access = user.data.access
   },
   [types.LOGOUT_USER_REQUEST] (state) {

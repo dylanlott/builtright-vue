@@ -14,9 +14,9 @@
       <v-list class="pa-0">
         <v-list-item>
           <v-list-tile avatar tag="div">
-            <v-list-tile-avatar>
+            <!-- <v-list-tile-avatar>
               <v-icon>account_circle</v-icon>
-            </v-list-tile-avatar>
+            </v-list-tile-avatar> -->
             <v-list-tile-content>
               <v-list-tile-title v-show="user.token">{{ user.email }}</v-list-tile-title>
               <v-list-tile-title v-show="!user.token">

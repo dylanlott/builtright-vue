@@ -19,7 +19,6 @@ export default {
   addPartToBuild (part, build, id, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        token
       }
       console.log('Part to add: ', part)
       console.log('BUILD PRE: ', build)
@@ -50,7 +49,6 @@ export default {
   getPartsForBuild (id, context) {
     return new Promise((resolve, reject) => {
       const params = {
-        token
       }
       axios.get(`${API_URL}/parts`, params)
         .then((res) => resolve(res.data.parts))

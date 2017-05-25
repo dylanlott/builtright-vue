@@ -11,7 +11,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`${URL}/posts`, {
         params: {
-          token,
           options
         }
       })
@@ -24,7 +23,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post(`${URL}/posts`, post, {
         params: {
-          token
         }
       })
       .then((res) => resolve(res.data))
@@ -36,7 +34,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`${URL}/posts/${id}`, {
         params: {
-          token
         }
       })
       .then((res) => resolve(res.data))
@@ -51,7 +48,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.put('${URL}/posts/${id}', post, {
         params: {
-          token
         }
       })
       .then((res) => resolve(res.data))
@@ -62,7 +58,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.delete(`${URL}/posts/${id}`, {
         params: {
-          token: token
         }
       })
       .then((res) => resolve(res))

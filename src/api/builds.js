@@ -18,7 +18,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/builds`, {
         params: {
-          token,
           user
         }
       })
@@ -38,7 +37,6 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`${API_URL}/builds/${id}`, {
         params: {
-          token
         }
       })
       .then((res) => resolve(res.data))
@@ -52,7 +50,6 @@ export default {
       const url = API_URL + '/builds'
       axios.post(url, build, {
         params: {
-          token: build.token
         }
       })
       .then((res) => resolve(res.data))
@@ -65,7 +62,6 @@ export default {
       const params = {
         limit: 10,
         skin: skip,
-        token: token
       }
       axios.get('/builds', params)
         .then((builds) => resolve(builds.data))
@@ -76,7 +72,6 @@ export default {
   deleteBuild (id) {
     return new Promise((resolve, reject) => {
       const params = {
-        token,
         id
       }
       axios.delete(`${API_URL}/builds/${id}`)
@@ -88,7 +83,6 @@ export default {
   updateBuild (build, id) {
     return new Promise((resolve, reject) => {
       const params = {
-        token
       }
       axios.put(`${API_URL}/builds/${id}`, build, params)
         .then(res => {

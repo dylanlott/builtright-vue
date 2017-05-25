@@ -7,6 +7,7 @@ import user from './api/user'
 import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueSweetAlert from 'vue-sweetalert'
+import config from './config'
 
 const storage = window.localStorage
 
@@ -19,6 +20,13 @@ const storage = window.localStorage
 Vue.use(Vuetify)
 Vue.use(BootstrapVue)
 Vue.use(VueSweetAlert)
+
+axios.defaults.baseURL = config.API_URL
+axios.defaults.params = {
+  token: storage.getItem('token')
+}
+
+console.log('token: ', storage.getItem('token'))
 
 router.beforeEach((to, from, next) => {
   (to.meta.auth && !user.checkAuth() && user.checkAuth() !== undefined)

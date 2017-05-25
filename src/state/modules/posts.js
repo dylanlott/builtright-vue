@@ -53,7 +53,7 @@ const mutations = {
     state.loading = false
     state.success = true
     state.postDetails = data
-    state.errors = undefined 
+    state.errors = undefined
   },
   [types.GET_POST_DETAILS_FAILURE] (state, errors) {
     state.loading = false
@@ -63,9 +63,9 @@ const mutations = {
 }
 
 const actions = {
-  getPosts ({commit, state}) {
+  getPosts ({commit, state}, options) {
     commit(types.GET_POSTS_REQUEST)
-    return posts.getPosts()
+    return posts.getPosts(options)
       .then((res) => {
         const posts = res.data
         commit(types.GET_POSTS_SUCCESS, posts)

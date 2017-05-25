@@ -44,14 +44,14 @@ plan.local('git', function(local) {
 	local.exec('git push deploy master')
 });
 
-// plan.remote('git', function(remote) {
-// 	remote.hostname();
-// 	remote.with('cd /var/www/builtrightapp.com/client', function() {
-// 		remote.exec('git pull origin master');
-// 		remote.exec('npm install');
-// 		remote.exec('npm run build');
-// 	});
-// })
+plan.remote('git', function(remote) {
+	remote.hostname();
+	remote.with('cd /var/www/builtrightapp.com/client', function() {
+		remote.exec('git pull origin master');
+		remote.exec('npm install');
+		remote.exec('npm run build');
+	});
+});
 
 plan.remote('check', function(remote) {
   remote.exec('docker ps');
