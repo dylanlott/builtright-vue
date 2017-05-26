@@ -3,9 +3,10 @@
     <div class="secondary__nav">
       Dashboard / Forum
     </div>
-    <router-link :to="{ name: 'addPost' }">
-      <v-btn name="addPost" raised success floating>
-        <v-icon>create</v-icon>
+
+    <router-link :to="{ name: 'addPost' }" class="routerlink">
+      <v-btn light v-tooltip:top="{ html: 'Write A Forum Post' }" name="addPost" raised floating class="cyan">
+        <v-icon class="white--text">create</v-icon>
       </v-btn>
     </router-link>
 
@@ -15,18 +16,16 @@
       </div>
       <div v-for="item in posts">
         <router-link :to="{ name: 'postDetail', params: { id: item._id }}">
-          <div class="post-list">
+          <div class="post-list elevation-1">
             <v-list two-line>
-              <template>
-                <v-list-item>
-                  <v-list-tile>
-                    <v-list-tile-content>
-                      <v-list-tile-title v-html="item.title" />
-                      <v-list-tile-sub-title v-html="item.text" />
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list-item>
-              </template>
+              <v-list-item>
+                <v-list-tile>
+                  <v-list-tile-content>
+                    <v-list-tile-title v-html="item.title" />
+                    <v-list-tile-sub-title v-html="item.text" />
+                  </v-list-tile-content>
+                </v-list-tile>
+              </v-list-item>
             </v-list>
           </div>
         </router-link>

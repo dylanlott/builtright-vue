@@ -1,49 +1,27 @@
 import axios from 'axios'
 import * as types from '../state/mutation-types'
+import config from '../config'
 
 const storage = window.localStorage
-const API_URL = process.env.NODE_ENV==='production'
-  ? 'http://localhost:3030'
-  : 'http://localhost:3030'
+const API_URL = config.API_URL
 
 export default {
-  getUser (context) {
-    const url = `${API_URL}/users/${this.getUserId()}`
-    return new Promise((resolve, reject) => {
-      return axios.get(url, {
-        params: {
-          token: this.getToken()
-        }
-      })
-      .then((user) => resolve(user.data.data[0]))
-      .catch((err) => reject(err))
-    })
+  getUser (id, params={}, context) {
+    return axios.get(`/users/${id}`)
+      .then((res) => res.data)
+      .catch((err) => console.error(`Error getUser: ${err}`))
   },
 
-  login (user, context) {
-    return new Promise((resolve, reject) => {
-      return axios.post(`${API_URL}/auth/local`, user)
-        .then((res) => resolve(res.data))
-        .catch((err) => reject(err))
-    })
+  login(user, context) {
+    return axios.post(`/auth/local`, user)
+      .then((res) => res.data)
+      .catch((err) => console.error(`Error login: ${err}`))
   },
 
   signup (user, context) {
-    return new Promise((resolve, reject) => {
-      console.log('pre axios user', user);
-      axios.post(`${API_URL}/users`, user)
-        .then((user) => {
-          console.log('SIGN UP USER: ', user)
-          resolve(user)
-        })
-        .catch((err) => reject(err))
-    })
-  },
-
-  logoutUser (context) {
-    return new Promise((resolve, reject) => {
-      return resolve(true)
-    })
+    return axios.post(`${API_URL}/users`, user)
+      .then((user) => user.data)
+      .catch((err) => console.error(`Error signup: ${err}`))
   },
 
   getAuthHeader () {

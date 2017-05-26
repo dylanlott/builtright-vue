@@ -1,37 +1,43 @@
 <template lang="html">
-    <v-card class="addpart__card">
-      <v-card-text>
-        <h2 class="title">Add a post to the forums</h2>
-      </v-card-text>
-      <v-card-text class="subheading grey--text">
-        Post a question, a discussion topic, whatever is on your mind, share it!
-      </v-card-text>
-      <div class="addpart__form">
-        <form>
-          <v-card-row>
-            <v-text-field
-              id="postTitle"
-              name="postTitle"
-              label="Post Title"
-              v-model="post.title"
-              class="form__title"
-            ></v-text-field>
+  <v-container fluid>
+    <v-layout wrap>
+      <v-flex xs12 md8 offset-md2>
+        <v-card class="addpart__card">
+          <v-card-text>
+            <h1>Add a post to the forums</h1>
+          </v-card-text>
+          <v-card-text class="subheading grey--text">
+            Post a question, a discussion topic, whatever is on your mind, share it!
+          </v-card-text>
+          <div class="addpart__form">
+            <form>
+              <v-card-row>
+                <v-text-field
+                  id="postTitle"
+                  name="postTitle"
+                  label="Post Title"
+                  v-model="post.title"
+                  class="form__title"
+                ></v-text-field>
+              </v-card-row>
+              <v-card-row>
+                <v-text-field
+                 name="postText"
+                 label="Body"
+                 v-model="post.text"
+                 multi-line
+                ></v-text-field>
+              </v-card-row>
+            </form>
+          </div>
+          <v-card-row actions>
+            <v-btn flat class="primary--text" @click.native="goToForum()">Cancel</v-btn>
+            <v-btn flat v-on:click.native="submit()" class="primary--text">Submit</v-btn>
           </v-card-row>
-          <v-card-row>
-            <v-text-field
-             name="postText"
-             label="Body"
-             v-model="post.text"
-             multi-line
-            ></v-text-field>
-          </v-card-row>
-        </form>
-      </div>
-      <v-card-row actions>
-        <v-btn flat class="primary--text" @click.native="goToForum()">Cancel</v-btn>
-        <v-btn flat v-on:click.native="submit()" class="primary--text">Submit</v-btn>
-      </v-card-row>
-    </v-card>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
