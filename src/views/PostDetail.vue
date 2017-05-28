@@ -1,4 +1,5 @@
 <template lang="html">
+<v-container flex>
   <div class="post-details">
     <v-card>
     <v-card-row class="grey darken-1">
@@ -81,6 +82,7 @@
 
   </v-card>
   </div>
+</v-container>
 </template>
 
 <script>
