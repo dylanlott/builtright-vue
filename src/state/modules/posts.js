@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import posts from '../../api/posts'
+import comments from '../../api/comments'
 import { router } from '../../router/index'
 
 const storage = window.localStorage
@@ -11,6 +12,7 @@ const state = {
   postDetails: undefined,
   success: false,
   loading: false,
+  owner: false, //whether or not user is owner of post
   errors: ''
 }
 
@@ -104,18 +106,30 @@ const actions = {
       })
   },
 
-  updatePost ({commit, state}, update) {
+  updatePost ({commit, state}, previous, updated) {
     return null
   },
 
   deletePost ({commit, state}, id) {
     commit(types.DELETE_POST_REQUEST)
     return posts.deletePost(id)
+      .then((res) => res.data)
+      .catch((err) => err)
+  }
+}
+
+const getters = {
+  approvedPosts: state => {
+    return state.posts.filter((post) => !post.flagged)
+  },
+  flaggedPosts: state => {
+    return state.posts.filter((post) => post.flagged)
   }
 }
 
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

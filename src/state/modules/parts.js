@@ -11,7 +11,7 @@ const state = {
   errors: ''
 }
 
-const mutation = {
+const mutations = {
   [types.GET_PARTS_REQUEST] (state) {
     state.loading = true
     state.success = false

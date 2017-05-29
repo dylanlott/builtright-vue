@@ -62,7 +62,11 @@ const mutations = {
   [types.RECEIVE_USER_SUCCESS] (state, user) {
     state.loading = false
     state.success = true
-    state.user = user
+    state.email = user.data.email
+    state.token = user.token
+    state.access = user.data.access
+    state.mongo_id = user.data._id
+    state.user_id = user.data.user_id
   },
   [types.RECEIVE_USER_FAILURE] (state, errors) {
    state.loading = false
