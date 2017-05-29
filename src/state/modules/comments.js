@@ -4,6 +4,9 @@ import comments from '../../api/comments'
 
 const state = {
   comments: [],
+  limit: 0,
+  skip: 0,
+  total: 0,
   loading: false
 }
 
@@ -23,7 +26,6 @@ const mutations = {
     state.loading = false
     state.success = false
     state.errors = errors
-    state.comments = []
   },
   [types.ADD_COMMENT_REQUEST] (state) {
     state.loading = true
@@ -39,16 +41,29 @@ const mutations = {
     state.loading = false
     state.success = false
     state.errors = errors
+  },
+  [types.SET_COMMENT_SKIP] (state, skip) {
+    state.skip = skip
+  },
+  [types.SET_COMMENT_TOTAL] (state, total) {
+    state.total = total
+  },
+  [types.SET_COMMENT_LIMIT] (state, limit) {
+    state.limit = limit
   }
 }
 
 const actions = {
   getComments ({commit, state}, id) {
+    console.log('getComments: ', id)
     commit(types.GET_POST_COMMENTS_REQUEST)
     return comments.getComments(id)
       .then((comments) => {
         console.log('Post comments: ', comments)
-        commit(types.GET_POST_COMMENTS_SUCCESS, comments)
+        commit(types.GET_POST_COMMENTS_SUCCESS, comments.data)
+        commit(types.SET_SKIP, comments.skip)
+        commit(types.SET_TOTAL, comments.total)
+        commit(types.SET_LIMIT, comments.limit)
       })
       .catch((err) => commit(types.GET_POST_COMMENTS_FAILURE, err))
   },

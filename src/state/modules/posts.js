@@ -1,6 +1,5 @@
 import * as types from '../mutation-types'
 import posts from '../../api/posts'
-import comments from '../../api/comments'
 import { router } from '../../router/index'
 
 const storage = window.localStorage

@@ -17,9 +17,14 @@ export default {
    */
   getComments (id) {
     return axios.get('/comments', {
-      source: id
+      params: {
+        source: id
+      }
     })
-    .then((res) => res.data)
+    .then((res) => {
+      console.log('comments data', res.data)
+      return res.data
+    })
     .catch((err) => err)
   },
 
