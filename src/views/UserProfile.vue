@@ -25,7 +25,8 @@ export default {
     user: state => state.user
   }),
   created () {
-    this.$store.dispatch('getUserInfo')
+    console.log('this._id: ', this.user._id)
+    this.$store.dispatch('getUserInfo', this.user._id)
   }
 }
 </script>

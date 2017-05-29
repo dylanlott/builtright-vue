@@ -18,7 +18,7 @@
               <v-icon>account_circle</v-icon>
             </v-list-tile-avatar> -->
             <v-list-tile-content>
-              <v-list-tile-title v-show="user.token">{{ user.email }}</v-list-tile-title>
+              <v-list-tile-title v-show="user.token">{{ user.email || user.user_id }}</v-list-tile-title>
               <v-list-tile-title v-show="!user.token">
                 <router-link class="menu-link" to="login">Login</router-link>
               </v-list-tile-title>
@@ -138,7 +138,6 @@ export default {
   name: 'builtright',
   computed: mapState({
     user: state => state.user,
-    admin: state => state.admin,
     alerts: state => state.user.alerts
   }),
   data() {
@@ -159,11 +158,15 @@ export default {
     logout () {
       this.loggedOut = true
       this.$store.dispatch('logoutUser')
+    },
+    created () {
+      console.log('this.user._id', this.user._id)
     }
   },
   watch: {
     '$route': function () {
-      this.$store.dispatch('getUserInfo')
+      console.log('this.user._id', this.user._id)
+      this.$store.dispatch('getUserInfo', this.user._id)
     }
   }
 }

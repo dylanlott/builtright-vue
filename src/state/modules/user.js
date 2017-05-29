@@ -6,13 +6,13 @@ const storage = window.localStorage
 const state = {
   token: storage.getItem('token') || '',
   user_id: storage.getItem('user_id') || '',
-  user: {},
+  email: storage.getItem('email'),
+  _id: storage.getItem('_id'),
+  displayName: storage.getItem('displayName'),
   admin: false,
   access: 1000,
-  mongo_id: undefined,
   loading: false,
-  success: true,
-  alerts: []
+  success: true
 }
 
 const mutations = {
@@ -21,10 +21,13 @@ const mutations = {
     state.success = false
   },
   [types.LOGIN_USER_SUCCESS] (state, user) {
+    console.log('RESPONSE ID: ', user.data._id)
     storage.setItem('user_id', user.data.email)
     storage.setItem('access', user.data.access)
+    storage.setItem('email', user.data.email)
     storage.setItem('token', user.token)
     storage.setItem('_id', user.data._id)
+    storage.setItem('displayName', user.data.displayName)
     state.mongo_id = user.data._id
     state.user_id = user.data.user_id
     state.email = user.data.email
@@ -100,9 +103,9 @@ const actions = {
     router.push({ name: 'landing' })
     commit(types.LOGOUT_USER_SUCCESS)
   },
-  getUserInfo ({commit, state}) {
+  getUserInfo ({commit, state}, id) {
     commit(types.RECEIVE_USER_INFO)
-    return api.getUser()
+    return api.getUser(id)
       .then((user) => {
         commit(types.RECEIVE_USER_SUCCESS, user)
         return user;

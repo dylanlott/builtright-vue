@@ -5,18 +5,27 @@
     </div>
 
     <v-btn floating class="orange floating">
-        <v-icon light>add</v-icon>
-      </v-btn>
+      <v-icon light>add</v-icon>
+    </v-btn>
 
     <v-card class="details__card">
+      <v-card-text>
+        <code>{{ details }}</code>
+      </v-card-text>
+    </v-card>
+
+    <v-card class="details__card">
+      <v-card-title>Parts</v-card-title>
+      <v-card-text>
+
+      </v-card-text>
+    </v-card>
+
+    <v-card class="details__card">
+      <v-card-title>Comments</v-card-title>
        <v-card-text>
-
-         <code>{{ details }}</code>
-
        </v-card-text>
-
      </v-card>
-
 
   </div>
 </template>
@@ -34,7 +43,8 @@ export default {
   },
   computed: mapState({
     details: state => state.builds.details,
-    parts: state => state.builds.parts
+    parts: state => state.builds.parts,
+    user: state => state.user
   }),
   created () {
     this.$store.dispatch('getBuildDetails', this.$route.params.id)

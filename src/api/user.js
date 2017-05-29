@@ -19,7 +19,7 @@ export default {
   },
 
   signup (user, context) {
-    return axios.post(`${API_URL}/users`, user)
+    return axios.post(`/users`, user)
       .then((user) => user.data)
       .catch((err) => console.error(`Error signup: ${err}`))
   },

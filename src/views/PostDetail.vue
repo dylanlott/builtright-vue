@@ -64,17 +64,17 @@
         <div slot="header">Comment on this post</div>
         <v-card style="margin-top: 0px;">
           <v-card-text class="grey lighten-3">
-            <v-row row padded>
+            <v-layout row padded>
                <v-text-field
                  name="comment"
                  label="Add a comment"
                  v-model="comment.body"
                  multi-line
                ></v-text-field>
-             </v-row>
-             <v-row>
-               <v-btn primary dark @click.native="submitComment()">Submit</v-btn>
-             </v-row>
+             </v-layout>
+             <v-layout>
+               <v-btn primary dark @click.native="submitComment(comment)" class="white--text">Submit</v-btn>
+             </v-layout>
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
@@ -105,7 +105,11 @@ export default {
     console.log('this.postDetails', this.postDetails)
   },
   components: {},
-  methods: {}
+  methods: {
+    submitComment: function (comment) {
+      console.log('comment: ', comment)
+    }
+  }
 }
 </script>
 

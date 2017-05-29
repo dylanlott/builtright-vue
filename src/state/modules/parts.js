@@ -53,6 +53,15 @@ const actions = {
     return parts.addPartToBuild(part, build, id)
       .then((res) => commit(types.ADD_PART_SUCCESS), part)
       .catch((err) => commit(types.ADD_PART_FAILURE, err))
+  },
+  deletePart ({commit, state}, build, id) {
+
+  },
+  editPart ({commit, state}, part, newPart) {
+
+  },
+  getParts ({commit, state}, params) {
+
   }
 }
 
