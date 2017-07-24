@@ -17,7 +17,7 @@
                     <v-list-tile-title>Report this post</v-list-tile-title>
                   </v-list-tile>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item v-if="details.user === user.user_id">
                   <v-list-tile>
                     <v-list-tile-title>Delete this post</v-list-tile-title>
                   </v-list-tile>
@@ -35,45 +35,14 @@
 
       <v-card-text>
         <v-card-row>
-          <div>
+          <v-card-text class="text-left">
             <div>{{ details.text }}</div>
-          </div>
+          </v-card-text>
         </v-card-row>
       </v-card-text>
 
-      <v-card>
-        <v-card-title>Comments</v-card-title>
-        <v-list two-line>
-          <v-list-item v-for="comment in comments.comments">
-            <v-list-tile avatar ripple>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ comment.user }}</v-list-tile-title>
-                <v-list-tile-sub-title>{{ comment.text }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-              <v-list-tile-action>
-
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-item>
-        </v-list>
-      </v-card>
-
-      <v-card>
-        <v-card-title style="font-size: 16px;">Add to the discussion</v-card-title>
-        <v-card-text class="grey lighten-3">
-          <v-layout row padded>
-             <v-text-field
-               name="comment"
-               label="Add a comment"
-               v-model="comment.text"
-               multi-line
-             ></v-text-field>
-           </v-layout>
-           <v-layout>
-             <v-btn primary dark @click.native="submitComment(comment)" class="white--text">Submit</v-btn>
-           </v-layout>
-        </v-card-text>
-      </v-card>
+      <CommentList></CommentList>
+      <AddComment></AddComment>
 
     </v-card>
   </div>
@@ -82,15 +51,10 @@
 
 <script>
 import { mapState } from 'vuex'
+import CommentList from '../components/CommentList.vue'
+import AddComment from '../components/AddComment.vue'
 
 export default {
-  data () {
-    return {
-      comment: {
-        text: ''
-      },
-    }
-  },
   computed: mapState({
     user: state => state.user,
     details: state => state.posts.postDetails,
@@ -100,21 +64,7 @@ export default {
     this.$store.dispatch('getPostDetails', this.$route.params.id)
     this.$store.dispatch('getComments', this.$route.params.id)
   },
-  components: {},
-  methods: {
-    submitComment: function (comment) {
-      if (!comment.text) {
-        this.$swal('Comment must contain text.')
-      }
-      const _comment = {
-        text: comment.text,
-        user: this.user.user_id,
-        source: this.$route.params.id
-      }
-      console.log('_comment: ', _comment)
-      this.$store.dispatch('addComment', _comment)
-    }
-  }
+  components: {CommentList, AddComment}
 }
 </script>
 

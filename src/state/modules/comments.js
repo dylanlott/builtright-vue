@@ -55,11 +55,9 @@ const mutations = {
 
 const actions = {
   getComments ({commit, state}, id) {
-    console.log('getComments: ', id)
     commit(types.GET_POST_COMMENTS_REQUEST)
     return comments.getComments(id)
       .then((comments) => {
-        console.log('Post comments: ', comments)
         commit(types.GET_POST_COMMENTS_SUCCESS, comments.data)
         commit(types.SET_SKIP, comments.skip)
         commit(types.SET_TOTAL, comments.total)
@@ -71,10 +69,7 @@ const actions = {
   addComment ({commit, state}, comment) {
     commit(types.ADD_COMMENT_REQUEST)
     return comments.createComment(comment)
-      .then((res) => {
-        console.log('add comment response: ', res)
-        commit(types.ADD_COMMENT_SUCCESS, comment)
-      })
+      .then((res) => commit(types.ADD_COMMENT_SUCCESS, comment))
       .catch((err) => commit(types.ADD_COMMENT_FAILURE, err))
   }
 }

@@ -21,10 +21,7 @@ export default {
         source: id
       }
     })
-    .then((res) => {
-      console.log('comments data', res.data)
-      return res.data
-    })
+    .then((res) => res.data)
     .catch((err) => err)
   },
 

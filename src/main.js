@@ -21,6 +21,16 @@ axios.defaults.params = {
   token: user.getToken()
 }
 
+axios.interceptors.response.use(function(config) {
+  console.log('response: ', config)
+  return config
+}, function(err) {
+  if (err.message === 'Request failed with status code 401') {
+    localStorage.clear()
+  }
+  return Promise.reject(err)
+})
+
 router.beforeEach((to, from, next) => {
   (to.meta.auth && !user.checkAuth() && user.checkAuth() !== undefined)
     ? next({path: '/login'})
